@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/fragment_coarse_header.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/fragment_coarse_sub_arts.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/fragment_coarse_sub_bio.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/fragment_coarse_sub_com.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Vashu gupta/AndroidStudioProjects/Ficon5/app/src/main/res/layout/fragment_coarse_sub_maths.xml" value="0.17074275362318841" />
       </map>
     </option>
   </component>
