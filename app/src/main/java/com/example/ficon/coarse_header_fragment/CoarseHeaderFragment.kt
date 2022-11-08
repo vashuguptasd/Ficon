@@ -23,22 +23,12 @@ class CoarseHeaderFragment : Fragment() {
         binding.apply {
 
             val viewPager = viewPagerCoarseFragment
-//            val tabLayout = tabLayoutCoarseFragment
             val adapter = CoarseViewPagerAdapter(this@CoarseHeaderFragment)
 
             viewPager.adapter = adapter
-//            viewPager.setPageTransformer(ZoomOutPageTransformer())
             viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
 
-//            TabLayoutMediator(tabLayout,viewPager){tab,position ->
-//                when(position){
-//                    0 -> tab.text = "Maths"
-//                    1 -> tab.text = "Bio"
-//                    2 ->tab.text = "Com.."
-//                    3 ->tab.text = "Arts"
-//
-//                }
-//            }.attach()
+
 
         }
 
