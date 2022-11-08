@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardBackgroundColor="@color/logo_purple"
+            app:cardBackgroundColor="@color/logo_purple_primary"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp">
 
@@ -42,12 +42,13 @@
                     android:textColor="@color/white" />
 
                 <TextView
+                    android:id="@+id/course_fab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:text="@string/bachelor_of_science"
                     android:text="@{coarseXmlVariable.fullCoarseName}"
                     android:textColor="@color/light_white"
-                    style="@style/TextAppearance.Material3.HeadlineSmall" />
+                    style="@style/TextAppearance.Material3.BodyLarge" />
 
 
             </LinearLayout>

@@ -2,7 +2,8 @@
     <string name="app_name">Ficon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="choose_your_coarse">Choose Your Coarse</string>
+    <string name="choose_your_course">Choose Your Course</string>
     <string name="b_sc">B.Sc</string>
     <string name="bachelor_of_science">Bachelor of Science</string>
+    <string name="add_new_course">Add New Course</string>
 </resources>

@@ -2,7 +2,7 @@
 
     <!--    Splash Screen Theme-->
     <style name="Theme.MySplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#331E6D</item>
+        <item name="windowSplashScreenBackground">@color/logo_purple</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ficon_blue_big_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.Ficon</item>
     </style>
@@ -12,8 +12,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Ficon" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#331E6D</item>
-        <item name="colorPrimaryVariant">#331E6D</item>
+        <item name="colorPrimary">@color/logo_purple</item>
+        <item name="colorPrimaryVariant">@color/logo_purple</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
