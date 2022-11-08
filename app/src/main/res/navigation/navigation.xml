@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/coarseHeaderFragment">
+    app:startDestination="@id/askingCoarseFragment">
+
 
     <fragment
-        android:id="@+id/coarseHeaderFragment"
-        android:name="com.example.ficon.coarse_header_fragment.CoarseHeaderFragment"
-        android:label="CoarseHeaderFragment" />
+        android:id="@+id/askingCoarseFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.AskingCoarseFragment"
+        android:label="fragment_asking_coarse"
+        tools:layout="@layout/fragment_asking_coarse" >
+        <action
+            android:id="@+id/action_askingCoarseFragment_to_askingYearFragment"
+            app:destination="@id/askingYearFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/askingOptionalFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.AskingOptionalFragment"
+        android:label="fragment_asking_optional"
+        tools:layout="@layout/fragment_asking_optional" >
+        <argument
+            android:name="main_coarse"
+            app:argType="string" />
+        <argument
+            android:name="coarse_year"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/askingYearFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.AskingYearFragment"
+        android:label="fragment_asking_year"
+        tools:layout="@layout/fragment_asking_year" >
+        <action
+            android:id="@+id/action_askingYearFragment_to_askingOptionalFragment"
+            app:destination="@id/askingOptionalFragment" />
+        <argument
+            android:name="main_coarse"
+            app:argType="string" />
+    </fragment>
 </navigation>
