@@ -6,4 +6,6 @@
     <string name="b_sc">B.Sc</string>
     <string name="bachelor_of_science">Bachelor of Science</string>
     <string name="add_new_course">Add New Course</string>
+    <string name="select_your_year">Select Your Year</string>
+    <string name="select_optional">Select Optional</string>
 </resources>

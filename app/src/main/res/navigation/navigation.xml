@@ -13,7 +13,11 @@
         tools:layout="@layout/fragment_asking_coarse" >
         <action
             android:id="@+id/action_askingCoarseFragment_to_askingYearFragment"
-            app:destination="@id/askingYearFragment" />
+            app:destination="@id/askingYearFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/askingOptionalFragment"
@@ -34,7 +38,11 @@
         tools:layout="@layout/fragment_asking_year" >
         <action
             android:id="@+id/action_askingYearFragment_to_askingOptionalFragment"
-            app:destination="@id/askingOptionalFragment" />
+            app:destination="@id/askingOptionalFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <argument
             android:name="main_coarse"
             app:argType="string" />

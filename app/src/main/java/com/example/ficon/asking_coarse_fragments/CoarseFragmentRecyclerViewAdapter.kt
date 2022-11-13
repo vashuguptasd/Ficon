@@ -1,6 +1,5 @@
 package com.example.ficon.asking_coarse_fragments
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ficon.databinding.ChoooseCoarseSingleListItemBinding
 
-class CoarseFragmentRecyclerViewAdapter : ListAdapter<CoarseDataClass, CoarseFragmentRecyclerViewAdapter.CoarseViewHolder>(CoarseDiffUtil()) {
+class CoarseFragmentRecyclerViewAdapter (private val clickListener: ClickListener) : ListAdapter<CoarseDataClass, CoarseFragmentRecyclerViewAdapter.CoarseViewHolder>(CoarseDiffUtil()) {
 
 
     class CoarseDiffUtil : DiffUtil.ItemCallback<CoarseDataClass>() {
@@ -36,8 +35,9 @@ class CoarseFragmentRecyclerViewAdapter : ListAdapter<CoarseDataClass, CoarseFra
             }
         }
 
-        fun bind(item: CoarseDataClass?) {
+        fun bind(item: CoarseDataClass?, clickListener: ClickListener) {
             binding.coarseXmlVariable = item
+            binding.xmlClickVariable = clickListener
         }
 
     }
@@ -48,7 +48,10 @@ class CoarseFragmentRecyclerViewAdapter : ListAdapter<CoarseDataClass, CoarseFra
 
     override fun onBindViewHolder(holder: CoarseViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener)
     }
 
+}
+class ClickListener (val click : (id : String )->Unit){
+    fun onClick(id:String) = click(id)
 }

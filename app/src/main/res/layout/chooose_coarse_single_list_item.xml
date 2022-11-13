@@ -3,52 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+
     <data>
         <variable
             name="coarseXmlVariable"
             type="com.example.ficon.asking_coarse_fragments.CoarseDataClass" />
+        <variable
+            name="xmlClickVariable"
+            type="com.example.ficon.asking_coarse_fragments.ClickListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp">
 
         <androidx.cardview.widget.CardView
+            android:onClick="@{() ->xmlClickVariable.onClick(coarseXmlVariable.coarse)}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardBackgroundColor="@color/logo_purple_primary"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="15dp"
-            app:cardElevation="8dp">
+            app:cardElevation="1dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="0.5dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginStart="4dp"
+                android:orientation="vertical"
                 android:padding="8dp">
 
                 <TextView
+                    style="@style/TextAppearance.Material3.HeadlineLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/b_sc"
                     android:text="@{coarseXmlVariable.coarse}"
-                   style="@style/TextAppearance.Material3.HeadlineLarge"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black"
+                    tools:text="@string/b_sc" />
 
                 <TextView
                     android:id="@+id/course_fab"
+                    style="@style/TextAppearance.Material3.BodyLarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:text="@string/bachelor_of_science"
                     android:text="@{coarseXmlVariable.fullCoarseName}"
-                    android:textColor="@color/light_white"
-                    style="@style/TextAppearance.Material3.BodyLarge" />
+                    android:textColor="@color/black"
+                    tools:text="@string/bachelor_of_science" />
 
 
             </LinearLayout>
