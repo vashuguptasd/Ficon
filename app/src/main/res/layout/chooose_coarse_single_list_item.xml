@@ -21,10 +21,10 @@
         android:layout_height="match_parent"
         android:padding="5dp">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:onClick="@{() ->xmlClickVariable.onClick(coarseXmlVariable.coarse)}"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             app:cardCornerRadius="15dp"
             app:cardElevation="1dp"
             app:strokeColor="@color/black"
-            app:strokeWidth="0.5dp"
+            app:strokeWidth="0.8dp"
             android:focusable="true"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -41,6 +41,7 @@
             >
 
             <LinearLayout
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
@@ -67,6 +68,6 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

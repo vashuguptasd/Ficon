@@ -8,4 +8,6 @@
     <string name="add_new_course">Add New Course</string>
     <string name="select_your_year">Select Your Year</string>
     <string name="select_optional">Select Optional</string>
+    <string name="year_wise">Year Wise</string>
+    <string name="semester_wise">Semester Wise</string>
 </resources>

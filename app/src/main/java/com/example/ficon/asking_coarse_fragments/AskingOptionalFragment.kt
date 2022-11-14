@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ficon.R
 import com.example.ficon.databinding.FragmentAskingOptionalBinding
 
 class AskingOptionalFragment : Fragment() {
@@ -27,7 +26,7 @@ class AskingOptionalFragment : Fragment() {
 
             val recyclerView = selectYourYearRecyclerView
 
-            val adapter = CoarseFragmentRecyclerViewAdapter(ClickListener {
+            val adapter = CoarseFragmentRecyclerViewAdapter( ClickListener {
                 viewModel.updateOptional(it)
                 Toast.makeText(activity, it,Toast.LENGTH_SHORT).show()
 

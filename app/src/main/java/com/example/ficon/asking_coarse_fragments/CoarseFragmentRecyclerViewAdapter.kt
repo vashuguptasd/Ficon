@@ -1,13 +1,19 @@
 package com.example.ficon.asking_coarse_fragments
 
+import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ficon.databinding.ChoooseCoarseSingleListItemBinding
 
-class CoarseFragmentRecyclerViewAdapter (private val clickListener: ClickListener) : ListAdapter<CoarseDataClass, CoarseFragmentRecyclerViewAdapter.CoarseViewHolder>(CoarseDiffUtil()) {
+class CoarseFragmentRecyclerViewAdapter(
+    private val clickListener: ClickListener
+) : ListAdapter<CoarseDataClass, CoarseFragmentRecyclerViewAdapter.CoarseViewHolder>(CoarseDiffUtil()) {
 
 
     class CoarseDiffUtil : DiffUtil.ItemCallback<CoarseDataClass>() {
@@ -36,8 +42,12 @@ class CoarseFragmentRecyclerViewAdapter (private val clickListener: ClickListene
         }
 
         fun bind(item: CoarseDataClass?, clickListener: ClickListener) {
+
             binding.coarseXmlVariable = item
             binding.xmlClickVariable = clickListener
+
+
+
         }
 
     }
