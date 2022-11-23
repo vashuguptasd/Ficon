@@ -10,4 +10,5 @@
     <string name="select_optional">Select Optional</string>
     <string name="year_wise">Year Wise</string>
     <string name="semester_wise">Semester Wise</string>
+    <string name="choose_your_subject">Choose Your Subject</string>
 </resources>

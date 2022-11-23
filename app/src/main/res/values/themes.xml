@@ -2,11 +2,10 @@
 
     <!--    Splash Screen Theme-->
     <style name="Theme.MySplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/logo_purple</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ficon_blue_big_logo</item>
+        <item name="windowSplashScreenBackground">@android:color/holo_blue_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_png</item>
         <item name="postSplashScreenTheme">@style/Theme.Ficon</item>
     </style>
-
 
 
     <!-- Base application theme. -->
@@ -22,5 +21,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 </resources>

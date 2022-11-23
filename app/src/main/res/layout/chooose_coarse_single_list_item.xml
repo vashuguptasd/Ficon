@@ -22,9 +22,10 @@
         android:padding="5dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/single_item_card_view"
             android:onClick="@{() ->xmlClickVariable.onClick(coarseXmlVariable.coarse)}"
             android:layout_width="0dp"
-            android:layout_height="130dp"
+            android:layout_height="130sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,6 @@
             android:focusable="true"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-
             >
 
             <LinearLayout
@@ -49,6 +49,7 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/heading_text_view"
                     style="@style/TextAppearance.Material3.HeadlineLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
                     tools:text="@string/b_sc" />
 
                 <TextView
-                    android:id="@+id/course_fab"
+                    android:id="@+id/body_text_view"
                     style="@style/TextAppearance.Material3.BodyLarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

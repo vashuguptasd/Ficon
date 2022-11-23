@@ -3,191 +3,195 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/gradiant"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_margin="10dp"
-                android:id="@+id/textView"
-                android:textColor="@color/black"
-                style="@style/TextAppearance.Material3.HeadlineMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/year_wise"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
+            <androidx.constraintlayout.widget.ConstraintLayout
 
 
-                android:id="@+id/cardView"
+
+                android:background="@drawable/gradiant"
                 android:layout_width="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" >
+                android:layout_height="match_parent">
 
                 <TextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/textView"
+                    android:textColor="@color/black"
+                    style="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year_wise"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    android:text="Part 1 (1st Year)"
-                    style="@style/year_select_textview" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
 
 
-                android:id="@+id/cardView2"
-                android:layout_width="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" >
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="0.8dp"
 
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" >
+
+                    <TextView
+                        android:id="@+id/part_one_text_view"
+                        android:text="Part 1 (1st Year)"
+                        style="@style/year_select_textview" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
+
+
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" >
+
+                    <TextView
+                        android:id="@+id/part_two_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Part 2 (2nd Year)"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
+
+
+                    android:id="@+id/cardView3"
+                    android:layout_width="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2" >
+
+                    <TextView
+                        android:id="@+id/part_three_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Part 3 (3rd Year)"/>
+
+                </com.google.android.material.card.MaterialCardView>
                 <TextView
-                    style="@style/year_select_textview"
-                    android:text="Part 2 (2nd Year)"/>
 
-            </com.google.android.material.card.MaterialCardView>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/semester_wise"
+                    style="@style/TextAppearance.Material3.HeadlineMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
-
-                android:id="@+id/cardView3"
-                android:layout_width="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" >
-
-                <TextView
-                    style="@style/year_select_textview"
-
-                    android:text="Part 3 (3rd Year)"/>
-
-            </com.google.android.material.card.MaterialCardView>
-            <TextView
-
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="10dp"
-
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/semester_wise"
-                style="@style/TextAppearance.Material3.HeadlineMedium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
 
 
-                android:id="@+id/cardView4"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView5"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" >
+                    android:id="@+id/cardView4"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" >
 
-                <TextView
-                    style="@style/year_select_textview"
+                    <TextView
+                        android:id="@+id/sem_1_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 1"/>
+                </com.google.android.material.card.MaterialCardView>
 
-                    android:text="Semester 1"/>
-            </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView5"
+                    style="@style/my_clickable_cardview"
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardView5"
-                style="@style/my_clickable_cardview"
+                    android:layout_width="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/cardView4"
+                    app:layout_constraintTop_toTopOf="@+id/cardView4">
 
-                android:layout_width="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cardView4"
-                app:layout_constraintTop_toTopOf="@+id/cardView4">
+                    <TextView
+                        android:id="@+id/sem_2_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 2" />
 
-                <TextView
-                    style="@style/year_select_textview"
+                </com.google.android.material.card.MaterialCardView>
 
-                    android:text="Semester 2" />
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
 
-            </com.google.android.material.card.MaterialCardView>
+                    android:id="@+id/cardView7"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView6"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView4" >
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
+                    <TextView
+                        android:id="@+id/sem_3_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 3"/>
 
-                android:id="@+id/cardView7"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView4" >
+                </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/year_select_textview"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView6"
+                    style="@style/my_clickable_cardview"
 
-                    android:text="Semester 3"/>
+                    android:layout_width="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/cardView7"
+                    app:layout_constraintTop_toTopOf="@+id/cardView7">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/sem_4_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 4" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardView6"
-                style="@style/my_clickable_cardview"
+                </com.google.android.material.card.MaterialCardView>
 
-                android:layout_width="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cardView7"
-                app:layout_constraintTop_toTopOf="@+id/cardView7">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView8"
+                    style="@style/my_clickable_cardview"
 
-                <TextView
-                    style="@style/year_select_textview"
+                    android:layout_width="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/cardView9"
+                    app:layout_constraintTop_toTopOf="@+id/cardView9">
 
-                    android:text="Semester 4" />
+                    <TextView
+                        android:id="@+id/sem_6_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 6" />
+                </com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/my_clickable_cardview"
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardView8"
-                style="@style/my_clickable_cardview"
+                    android:id="@+id/cardView9"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView8"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView7" >
 
-                android:layout_width="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cardView9"
-                app:layout_constraintTop_toTopOf="@+id/cardView9">
-
-                <TextView
-                    style="@style/year_select_textview"
-
-                    android:text="Semester 6" />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/my_clickable_cardview"
-
-                android:id="@+id/cardView9"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView8"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView7" >
-
-                <TextView
-                    style="@style/year_select_textview"
-
-                    android:text="Semester 5"/>
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/sem_5_text_view"
+                        style="@style/year_select_textview"
+                        android:text="Semester 5"/>
+                </com.google.android.material.card.MaterialCardView>
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

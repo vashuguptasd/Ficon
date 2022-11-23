@@ -1,17 +1,16 @@
 package com.example.ficon.asking_coarse_fragments
 
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ficon.databinding.ChoooseCoarseSingleListItemBinding
 
 class CoarseFragmentRecyclerViewAdapter(
+    private val wrapContent : Boolean,
+    private val headingSize : Int ,
+    private val bodySize : Int ,
     private val clickListener: ClickListener
 ) : ListAdapter<CoarseDataClass, CoarseFragmentRecyclerViewAdapter.CoarseViewHolder>(CoarseDiffUtil()) {
 
@@ -19,6 +18,8 @@ class CoarseFragmentRecyclerViewAdapter(
     class CoarseDiffUtil : DiffUtil.ItemCallback<CoarseDataClass>() {
         override fun areItemsTheSame(oldItem: CoarseDataClass, newItem: CoarseDataClass): Boolean {
             return oldItem.coarse == newItem.coarse
+
+
         }
 
         override fun areContentsTheSame(
@@ -41,12 +42,21 @@ class CoarseFragmentRecyclerViewAdapter(
             }
         }
 
-        fun bind(item: CoarseDataClass?, clickListener: ClickListener) {
+        fun bind(
+            item: CoarseDataClass?,
+            clickListener: ClickListener,
+            headingSize: Int,
+            bodySize: Int,
+            wrapContent: Boolean
+        ) {
 
+            if (wrapContent){
+                binding.singleItemCardView.layoutParams = ViewGroup.LayoutParams(0,50)
+            }
             binding.coarseXmlVariable = item
             binding.xmlClickVariable = clickListener
-
-
+            binding.headingTextView.textSize = headingSize.toFloat()
+            binding.bodyTextView.textSize = bodySize.toFloat()
 
         }
 
@@ -58,7 +68,7 @@ class CoarseFragmentRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: CoarseViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener)
+        holder.bind(item,clickListener,headingSize,bodySize,wrapContent)
     }
 
 }

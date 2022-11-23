@@ -29,8 +29,6 @@ class AskingCoarseFragment : Fragment() {
         binding = FragmentAskingCoarseBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
-
-
         binding.apply {
             return setUpRecyclerView(application)
         }
@@ -38,7 +36,7 @@ class AskingCoarseFragment : Fragment() {
 
     private fun FragmentAskingCoarseBinding.setUpRecyclerView(application: Application?): View {
         val recyclerView = chooseCoarseRecyclerView
-        val adapter = CoarseFragmentRecyclerViewAdapter(ClickListener {
+        val adapter = CoarseFragmentRecyclerViewAdapter(false,33,13,ClickListener {
             viewModel.updateCoarse(it)
             Toast.makeText(activity,it,Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_askingCoarseFragment_to_askingYearFragment)
@@ -53,31 +51,35 @@ class AskingCoarseFragment : Fragment() {
                 CoarseDataClass("M.A", "Master of Arts"),
                 CoarseDataClass("B.Com", "Batchelor of Commerce"),
                 CoarseDataClass("M.Com", "Master of Commerce"),
-
-
                 CoarseDataClass("B.C.A", "Batchelor of Computer App.."),
                 CoarseDataClass("M.C.A", "Master of Computer App.."),
-
                 CoarseDataClass("B.Tech", "Bachelor of Technology"),
                 CoarseDataClass("M.Tech", "Master of Technology"),
-
                 CoarseDataClass("BBA", "Bachelors of Business Admin.."),
                 CoarseDataClass("MBA", "Master of Business Admin.."),
-
                 CoarseDataClass("LLB", "Bachelor of Laws"),
                 CoarseDataClass("LLM", "Master of Laws"),
-
-                CoarseDataClass("B-ED", "Bachelor in Education"),
-                CoarseDataClass(" M-ED", "Masters in Education"),
                 CoarseDataClass("B.Pharma", "Bachelor of Pharmacy"),
                 CoarseDataClass("M.Pharma", "Master of Pharmacy"),
-
+                CoarseDataClass("D.Pharma", "Diploma in Pharmacy"),
+                CoarseDataClass("B.ED", "Bachelor in Education"),
                 CoarseDataClass("BE", "Bachelor of Engineering"),
                 CoarseDataClass("ME", "Master of Engineering"),
                 CoarseDataClass("BSW ", "Bachelor of Social Work."),
-                CoarseDataClass("MSW", "Master of Social Work."),
+                CoarseDataClass("MSW", "Master of Social Work "),
                 CoarseDataClass("BPE", "Bachelor in Physical Edu.."),
                 CoarseDataClass("MPE", "Master in Physical Edu.."),
+                CoarseDataClass("BA-LLB", "Bachelor of Legislative Law"),
+                CoarseDataClass("BHSC", "Bachelor of Health Science."),
+                CoarseDataClass("BPED", "Master of Physical Education"),
+                CoarseDataClass("BVOC", "Bachelor of Vocation"),
+                CoarseDataClass("DIPLOMA", "Development and Improvement  "),
+                CoarseDataClass("MED", " Masters in Education"),
+                CoarseDataClass("MPED", "Master of Physical Education"),
+                CoarseDataClass("MPHIL", "Master of Philosophy"),
+                CoarseDataClass("SHASTRI", "Shastri"),
+                CoarseDataClass("ACHARYA", "Aacharya"),
+
             )
         )
         recyclerView.layoutManager = GridLayoutManager(application,2)
