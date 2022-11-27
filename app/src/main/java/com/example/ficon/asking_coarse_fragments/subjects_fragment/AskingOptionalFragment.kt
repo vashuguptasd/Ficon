@@ -30,6 +30,7 @@ class AskingOptionalFragment : Fragment() {
     ): View {
 
         database = FirebaseDatabase.getInstance().reference
+        database.keepSynced(true)
 
         binding = FragmentAskingOptionalBinding.inflate(layoutInflater)
         val activity = requireNotNull(this.activity).application
