@@ -1,4 +1,4 @@
-package com.example.ficon.asking_coarse_fragments
+package com.example.ficon.asking_coarse_fragments.adapter_and_dataClass
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ficon.databinding.ChoooseCoarseSingleListItemBinding
 
 class CoarseFragmentRecyclerViewAdapter(
-    private val wrapContent : Boolean,
     private val headingSize : Int ,
     private val bodySize : Int ,
     private val clickListener: ClickListener
@@ -47,12 +46,9 @@ class CoarseFragmentRecyclerViewAdapter(
             clickListener: ClickListener,
             headingSize: Int,
             bodySize: Int,
-            wrapContent: Boolean
         ) {
 
-            if (wrapContent){
-                binding.singleItemCardView.layoutParams = ViewGroup.LayoutParams(0,50)
-            }
+
             binding.coarseXmlVariable = item
             binding.xmlClickVariable = clickListener
             binding.headingTextView.textSize = headingSize.toFloat()
@@ -68,7 +64,7 @@ class CoarseFragmentRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: CoarseViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener,headingSize,bodySize,wrapContent)
+        holder.bind(item,clickListener,headingSize,bodySize)
     }
 
 }

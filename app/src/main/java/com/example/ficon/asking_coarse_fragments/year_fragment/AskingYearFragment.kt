@@ -1,4 +1,4 @@
-package com.example.ficon.asking_coarse_fragments
+package com.example.ficon.asking_coarse_fragments.year_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.ficon.R
+import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentAskingYearBinding
 
 class AskingYearFragment : Fragment() {
     private lateinit var binding: FragmentAskingYearBinding
-    private val viewModel: SharedViewModel by viewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +44,6 @@ class AskingYearFragment : Fragment() {
                 Toast.makeText(activity,text.toString(),Toast.LENGTH_SHORT).show()
             }
         }
-
-
 
         return binding.root
     }

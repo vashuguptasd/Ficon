@@ -1,4 +1,4 @@
-package com.example.ficon.asking_coarse_fragments
+package com.example.ficon.asking_coarse_fragments.adapter_and_dataClass
 
 data class SubjectsDataClass(
     val name: String? = null,

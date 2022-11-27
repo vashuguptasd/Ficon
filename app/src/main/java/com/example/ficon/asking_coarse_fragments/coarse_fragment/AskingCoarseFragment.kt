@@ -1,8 +1,6 @@
-package com.example.ficon.asking_coarse_fragments
+package com.example.ficon.asking_coarse_fragments.coarse_fragment
 
 import android.app.Application
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ficon.R
+import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickListener
+import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseDataClass
+import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
+import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentAskingCoarseBinding
 
 class AskingCoarseFragment : Fragment() {
@@ -36,7 +37,7 @@ class AskingCoarseFragment : Fragment() {
 
     private fun FragmentAskingCoarseBinding.setUpRecyclerView(application: Application?): View {
         val recyclerView = chooseCoarseRecyclerView
-        val adapter = CoarseFragmentRecyclerViewAdapter(false,33,13,ClickListener {
+        val adapter = CoarseFragmentRecyclerViewAdapter(33,13, ClickListener {
             viewModel.updateCoarse(it)
             Toast.makeText(activity,it,Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_askingCoarseFragment_to_askingYearFragment)

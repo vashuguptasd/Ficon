@@ -14,7 +14,7 @@
         android:id="@+id/frameLayout_year"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".asking_coarse_fragments.AskingCoarseFragment">
+        tools:context=".asking_coarse_fragments.coarse_fragment.AskingCoarseFragment">
 
 
 

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/askingCoarseFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.AskingCoarseFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.coarse_fragment.AskingCoarseFragment"
         android:label="fragment_asking_coarse"
         tools:layout="@layout/fragment_asking_coarse" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/askingOptionalFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.AskingOptionalFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.subjects_fragment.AskingOptionalFragment"
         android:label="fragment_asking_optional"
         tools:layout="@layout/fragment_asking_optional" >
         <argument
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/askingYearFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.AskingYearFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.year_fragment.AskingYearFragment"
         android:label="fragment_asking_year"
         tools:layout="@layout/fragment_asking_year" >
         <action
