@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.DialogBoxLayoutBinding
 
@@ -55,7 +57,6 @@ class DialogBox : DialogFragment() {
                             option3Visibility = true
 
                         }
-
                     }
                 }
             }
@@ -72,12 +73,16 @@ class DialogBox : DialogFragment() {
 
             binding.cardView10.setOnClickListener {
                 Log.e("testApp","I am clicked")
+                findNavController().navigate(R.id.action_askingOptionalFragment_to_holderFragment2)
+
             }
             binding.cardView11.setOnClickListener {
                 Log.e("testApp","I am clicked")
+
             }
             binding.cardView12.setOnClickListener {
                 Log.e("testApp","I am clicked")
+
             }
 
 

@@ -42,6 +42,7 @@ class AskingYearFragment : Fragment() {
                 viewModel.updateYear(text.toString())
                 findNavController().navigate(R.id.action_askingYearFragment_to_askingOptionalFragment)
                 Toast.makeText(activity,text.toString(),Toast.LENGTH_SHORT).show()
+
             }
         }
 

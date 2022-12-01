@@ -30,21 +30,24 @@
         <argument
             android:name="coarse_year"
             app:argType="string" />
+        <action
+            android:id="@+id/action_askingOptionalFragment_to_holderFragment2"
+            app:destination="@id/holderFragment" />
     </fragment>
     <fragment
         android:id="@+id/askingYearFragment"
         android:name="com.example.ficon.asking_coarse_fragments.year_fragment.AskingYearFragment"
         android:label="fragment_asking_year"
         tools:layout="@layout/fragment_asking_year" >
-        <action
-            android:id="@+id/action_askingYearFragment_to_askingOptionalFragment"
-            app:destination="@id/askingOptionalFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"/>
         <argument
             android:name="main_coarse"
             app:argType="string" />
+        <action
+            android:id="@+id/action_askingYearFragment_to_askingOptionalFragment"
+            app:destination="@id/askingOptionalFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/holderFragment"
+        android:name="com.example.ficon.pdfFragments.HolderFragment"
+        android:label="HolderFragment" />
 </navigation>

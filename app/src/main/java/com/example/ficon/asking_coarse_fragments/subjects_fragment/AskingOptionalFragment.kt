@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickListener
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
@@ -59,22 +62,24 @@ class AskingOptionalFragment : Fragment() {
 
         })
 
+
+
         return binding.root
     }
+
+
 
     private fun setUpRecyclerView(subList: MutableList<SubjectsDataClass>?) {
         binding.apply {
 
             val recyclerView = selectYourYearRecyclerView
-
             adapter = CoarseFragmentRecyclerViewAdapter(37, 17, ClickListener {
-
                 if (subList != null) {
                     getSubjectFromList(it,subList)?.let { it1 -> viewModel.updateSubjectOptions(it1) }
                 }
-
                 val dialogBox = DialogBox()
                 dialogBox.show(childFragmentManager,"dialog")
+
 
 
             })
@@ -87,6 +92,8 @@ class AskingOptionalFragment : Fragment() {
 
         }
     }
+
+
 
     private fun getSubjectFromList(
         name: String,

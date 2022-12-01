@@ -1,5 +1,6 @@
 package com.example.ficon.asking_coarse_fragments.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 
@@ -8,6 +9,7 @@ class SharedViewModel : ViewModel() {
     private var mCoarse = "unknown"
     private var mYear = "unknown"
     private var mParts : SubjectsDataClass? = null
+
 
     fun updateCoarse(coarse : String){
         mCoarse = coarse
