@@ -31,8 +31,8 @@
             android:name="coarse_year"
             app:argType="string" />
         <action
-            android:id="@+id/action_askingOptionalFragment_to_holderFragment2"
-            app:destination="@id/holderFragment" />
+            android:id="@+id/action_askingOptionalFragment_to_askingChapterFragment"
+            app:destination="@id/askingChapterFragment" />
     </fragment>
     <fragment
         android:id="@+id/askingYearFragment"
@@ -47,7 +47,8 @@
             app:destination="@id/askingOptionalFragment" />
     </fragment>
     <fragment
-        android:id="@+id/holderFragment"
-        android:name="com.example.ficon.pdfFragments.HolderFragment"
-        android:label="HolderFragment" />
+        android:id="@+id/askingChapterFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.askingChapterFragments.AskingChapterFragment"
+        android:label="fragment_asking_chapter"
+        tools:layout="@layout/fragment_asking_chapter" />
 </navigation>

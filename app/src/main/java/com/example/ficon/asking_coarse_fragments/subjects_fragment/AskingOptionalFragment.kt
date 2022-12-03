@@ -77,12 +77,14 @@ class AskingOptionalFragment : Fragment() {
                 if (subList != null) {
                     getSubjectFromList(it,subList)?.let { it1 -> viewModel.updateSubjectOptions(it1) }
                 }
-                val dialogBox = DialogBox()
-                dialogBox.show(childFragmentManager,"dialog")
-
+//                val dialogBox = DialogBox()
+//                dialogBox.show(childFragmentManager,"dialog")
+//
+//                perform your navigation
 
 
             })
+
 
             recyclerView.adapter = adapter
             adapter.submitList(subList?.asCoarseModel())

@@ -73,7 +73,7 @@ class DialogBox : DialogFragment() {
 
             binding.cardView10.setOnClickListener {
                 Log.e("testApp","I am clicked")
-                findNavController().navigate(R.id.action_askingOptionalFragment_to_holderFragment2)
+//                findNavController().navigate(R.id.action_askingOptionalFragment_to_holderFragment2)
 
             }
             binding.cardView11.setOnClickListener {
