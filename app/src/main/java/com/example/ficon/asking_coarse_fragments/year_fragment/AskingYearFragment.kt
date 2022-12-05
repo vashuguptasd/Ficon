@@ -40,7 +40,7 @@ class AskingYearFragment : Fragment() {
             val text = it.text
             it.setOnClickListener {
                 viewModel.updateYear(text.toString())
-                findNavController().navigate(R.id.action_askingYearFragment_to_askingOptionalFragment)
+                findNavController().navigate(R.id.action_askingYearFragment_to_subjectFragment)
                 Toast.makeText(activity,text.toString(),Toast.LENGTH_SHORT).show()
 
             }

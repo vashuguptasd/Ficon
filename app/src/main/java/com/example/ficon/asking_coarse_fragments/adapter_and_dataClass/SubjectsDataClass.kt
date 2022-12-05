@@ -3,12 +3,16 @@ package com.example.ficon.asking_coarse_fragments.adapter_and_dataClass
 data class SubjectsDataClass(
     val name: String? = null,
     val nameHindi: String? = null,
-    val part1english: String? = null,
-    val part1hindi: String? = null,
-    val part2english: String? = null,
-    val part2hindi: String? = null,
-    val part3english: String? = null,
-    val part3hindi: String? = null
+    val part1English: String? = null,
+    val part1Hindi: String? = null,
+    val part2English: String? = null,
+    val part2Hindi: String? = null,
+    val part3English: String? = null,
+    val part3Hindi: String? = null,
+    val chaptersPart1 : ChapterName? = null,
+    val chaptersPart2 : ChapterName? = null,
+    val chaptersPart3 : ChapterName? = null
+
 )
 
 fun List<SubjectsDataClass>.asCoarseModel(): List<CoarseDataClass> {

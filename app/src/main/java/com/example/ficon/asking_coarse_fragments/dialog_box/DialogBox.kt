@@ -31,28 +31,29 @@ class DialogBox : DialogFragment() {
                 it?.let {
                     binding.apply {
 
-                        it.part1hindi?.let {
+                        it.part1Hindi?.let {
                             subjectOption1Hindi.text = it
+
                         }
-                        it.part2hindi?.let {
+                        it.part2Hindi?.let {
                             subjectOption2Hindi.text = it
 
                         }
-                        it.part3hindi?.let {
+                        it.part3Hindi?.let {
                             subjectOption3Hindi.text = it
 
                         }
-                        it.part1english?.let {
+                        it.part1English?.let {
                             subjectOption1English.text = it
                             option1Visibility = true
 
                         }
-                        it.part2english?.let {
+                        it.part2English?.let {
                             subjectOption2English.text = it
                             option2Visibility = true
 
                         }
-                        it.part3english?.let {
+                        it.part3English?.let {
                             subjectOption3English.text = it
                             option3Visibility = true
 
@@ -73,18 +74,19 @@ class DialogBox : DialogFragment() {
 
             binding.cardView10.setOnClickListener {
                 Log.e("testApp","I am clicked")
-//                findNavController().navigate(R.id.action_askingOptionalFragment_to_holderFragment2)
+                findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }
             binding.cardView11.setOnClickListener {
                 Log.e("testApp","I am clicked")
+                findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }
             binding.cardView12.setOnClickListener {
                 Log.e("testApp","I am clicked")
+                findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }
-
 
             builder.setView(binding.root)
             builder.create()

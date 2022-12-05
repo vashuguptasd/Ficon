@@ -20,21 +20,6 @@
             app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
-        android:id="@+id/askingOptionalFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.subjects_fragment.AskingOptionalFragment"
-        android:label="fragment_asking_optional"
-        tools:layout="@layout/fragment_asking_optional" >
-        <argument
-            android:name="main_coarse"
-            app:argType="string" />
-        <argument
-            android:name="coarse_year"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_askingOptionalFragment_to_askingChapterFragment"
-            app:destination="@id/askingChapterFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/askingYearFragment"
         android:name="com.example.ficon.asking_coarse_fragments.year_fragment.AskingYearFragment"
         android:label="fragment_asking_year"
@@ -43,12 +28,19 @@
             android:name="main_coarse"
             app:argType="string" />
         <action
-            android:id="@+id/action_askingYearFragment_to_askingOptionalFragment"
-            app:destination="@id/askingOptionalFragment" />
+            android:id="@+id/action_askingYearFragment_to_subjectFragment"
+            app:destination="@id/subjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.subjects_fragment.SubjectFragment"
+        android:label="SubjectFragment" >
+        <action
+            android:id="@+id/action_subjectFragment_to_askingChapterFragment"
+            app:destination="@id/askingChapterFragment" />
     </fragment>
     <fragment
         android:id="@+id/askingChapterFragment"
         android:name="com.example.ficon.asking_coarse_fragments.askingChapterFragments.AskingChapterFragment"
-        android:label="fragment_asking_chapter"
-        tools:layout="@layout/fragment_asking_chapter" />
+        android:label="AskingChapterFragment" />
 </navigation>
