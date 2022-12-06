@@ -9,9 +9,8 @@ data class SubjectsDataClass(
     val part2Hindi: String? = null,
     val part3English: String? = null,
     val part3Hindi: String? = null,
-    val chaptersPart1 : ChapterName? = null,
-    val chaptersPart2 : ChapterName? = null,
-    val chaptersPart3 : ChapterName? = null
+    val part4English: String? = null,
+    val part4Hindi: String? = null
 
 )
 

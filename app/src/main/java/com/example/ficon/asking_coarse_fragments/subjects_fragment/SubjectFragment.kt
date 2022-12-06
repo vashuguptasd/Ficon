@@ -1,18 +1,12 @@
 package com.example.ficon.asking_coarse_fragments.subjects_fragment
 
-import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickListener
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
@@ -52,6 +46,7 @@ class SubjectFragment : Fragment() {
 
             val recyclerView = selectYourYearRecyclerView
             adapter = CoarseFragmentRecyclerViewAdapter(37, 17, ClickListener {
+                viewModel.mSubjectSelected = it
                 if (subList != null) {
                     viewModel.getSubjectFromList(it,subList)?.let { it1 -> viewModel.updateSubjectOptions(it1) }
                 }
@@ -68,12 +63,4 @@ class SubjectFragment : Fragment() {
 
         }
     }
-
-
-
-
-
-
-
-
 }

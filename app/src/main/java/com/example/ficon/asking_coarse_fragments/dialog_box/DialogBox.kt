@@ -26,6 +26,7 @@ class DialogBox : DialogFragment() {
             var option1Visibility = false
             var option2Visibility = false
             var option3Visibility = false
+            var option4Visibility = false
 
             viewModel.getSubjectsOptions().let { it ->
                 it?.let {
@@ -43,6 +44,10 @@ class DialogBox : DialogFragment() {
                             subjectOption3Hindi.text = it
 
                         }
+                        it.part4Hindi?.let {
+                            subjectOption4Hindi.text = it
+
+                        }
                         it.part1English?.let {
                             subjectOption1English.text = it
                             option1Visibility = true
@@ -58,6 +63,11 @@ class DialogBox : DialogFragment() {
                             option3Visibility = true
 
                         }
+                        it.part4English?.let {
+                            subjectOption4English.text = it
+                            option4Visibility = true
+
+                        }
                     }
                 }
             }
@@ -71,19 +81,27 @@ class DialogBox : DialogFragment() {
             if (!option3Visibility){
                 binding.cardView12.visibility = View.GONE
             }
+            if (!option4Visibility){
+                binding.cardView13.visibility = View.GONE
+            }
 
             binding.cardView10.setOnClickListener {
-                Log.e("testApp","I am clicked")
+                viewModel.mPartSelected = "part1"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }
             binding.cardView11.setOnClickListener {
-                Log.e("testApp","I am clicked")
+                viewModel.mPartSelected = "part2"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }
             binding.cardView12.setOnClickListener {
-                Log.e("testApp","I am clicked")
+                viewModel.mPartSelected = "part3"
+                findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
+
+            }
+            binding.cardView13.setOnClickListener {
+                viewModel.mPartSelected = "part4"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
 
             }

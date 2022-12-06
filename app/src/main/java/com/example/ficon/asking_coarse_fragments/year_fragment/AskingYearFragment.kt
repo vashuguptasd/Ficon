@@ -24,6 +24,7 @@ class AskingYearFragment : Fragment() {
         binding = FragmentAskingYearBinding.inflate(layoutInflater)
         val activity = requireNotNull(this.activity).application
 
+
         val views = listOf(
             binding.partOneTextView,
             binding.partTwoTextView,
@@ -42,6 +43,7 @@ class AskingYearFragment : Fragment() {
                 viewModel.updateYear(text.toString())
                 findNavController().navigate(R.id.action_askingYearFragment_to_subjectFragment)
                 Toast.makeText(activity,text.toString(),Toast.LENGTH_SHORT).show()
+
 
             }
         }

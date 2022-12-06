@@ -31,20 +31,14 @@ class AskingChapterFragment : Fragment() {
             recyclerView.layoutManager = GridLayoutManager(application,1)
 
             val adapter =  CoarseFragmentRecyclerViewAdapter(33,22, ClickListener {
-                Toast.makeText(application,"I am clicked ",Toast.LENGTH_SHORT).show()
+                Toast.makeText(application,"Call FireStore ",Toast.LENGTH_SHORT).show()
             })
             recyclerView.adapter = adapter
-            adapter.submitList(
-                listOf(
-                    CoarseDataClass("B.Sc", "Batchelor of Science"),
-                    CoarseDataClass("M.Sc", "Master of Science"),
-                    CoarseDataClass("B.A", "Batchelor of Arts"),
-                    CoarseDataClass("M.A", "Master of Arts"),
-                    CoarseDataClass("B.Com", "Batchelor of Commerce")
-                )
-            )
+            viewModel.listFromServer.observe(viewLifecycleOwner){
+
+            }
+
         }
-        Log.e("testApp",viewModel.getSubjectsOptions().toString())
 
         return binding.root
     }

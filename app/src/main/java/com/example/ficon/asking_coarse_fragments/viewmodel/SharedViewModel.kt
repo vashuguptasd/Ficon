@@ -10,28 +10,28 @@ import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsD
 import com.google.firebase.database.*
 
 class SharedViewModel : ViewModel() {
-
-    private var mCoarse = "unknown"
-    private var mYear = "unknown"
-    private var listRealtimeDatabase : SubjectsDataClass? = null
     private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    private var mCoarseSelected = "unknown"
+    private var mYearSelected = "unknown"
+    var mSubjectSelected ="unknown"
+    var mPartSelected = "unknown"
+    private var listRealtimeDatabase : SubjectsDataClass? = null
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
     var listFromServer : LiveData<List<SubjectsDataClass>> = _listFromServer
 
+    fun getFireStorePathString(): String {
+        val pathString =  mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
+        val regex = Regex("[^A-Za-z0-9\t]")
+        return regex.replace(pathString, "")
+    }
 
     fun updateCoarse(coarse : String){
-        mCoarse = coarse
+        mCoarseSelected = coarse
     }
+
     fun updateYear(year : String){
-        mYear = year
-    }
-
-    fun getCoarse(): String {
-        return mCoarse
-    }
-
-    fun getYear() : String{
-        return mYear
+        mYearSelected = year
     }
 
     fun getSubjectsOptions() : SubjectsDataClass? {
@@ -43,7 +43,7 @@ class SharedViewModel : ViewModel() {
     }
 
     fun getPathString(): String {
-        val pathString = mCoarse + mYear
+        val pathString = mCoarseSelected + mYearSelected
         val regex = Regex("[^A-Za-z0-9\t]")
         return regex.replace(pathString, "")
     }
@@ -63,10 +63,10 @@ class SharedViewModel : ViewModel() {
                             subList.add(data)
                         }
                     }
-                    Log.e("testApp", subList.toString())
 
                     //                    setUpRecyclerView(subList)
                     _listFromServer.value = subList
+                    Log.e("testApp","list fetched is $subList")
                 }
             }
 

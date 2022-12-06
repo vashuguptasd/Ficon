@@ -122,5 +122,41 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView13"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="0dp"
+            style="@style/my_clickable_cardview" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                >
+
+                <TextView
+                    android:id="@+id/subject_option_4_english"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Optional1"
+                    style="@style/TextAppearance.Material3.HeadlineMedium"/>
+
+                <TextView
+                    android:id="@+id/subject_option_4_hindi"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Optional1"
+                    style="@style/TextAppearance.Material3.BodyLarge"/>
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </layout>
