@@ -8,41 +8,42 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SharedViewModel : ViewModel() {
-    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
-
-    private var mCoarseSelected = "unknown"
-    private var mYearSelected = "unknown"
-    var mSubjectSelected ="unknown"
-    var mPartSelected = "unknown"
-    private var listRealtimeDatabase : SubjectsDataClass? = null
+    private var database = FirebaseDatabase.getInstance().reference
+    private var fireStore = FirebaseFirestore.getInstance()
+    private var mCoarseSelected = ""
+    private var mYearSelected = ""
+    var mSubjectSelected = ""
+    var mPartSelected = ""
+    private var listRealtimeDatabase: SubjectsDataClass? = null
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
-    var listFromServer : LiveData<List<SubjectsDataClass>> = _listFromServer
+    var listFromServer: LiveData<List<SubjectsDataClass>> = _listFromServer
 
-    fun getFireStorePathString(): String {
-        val pathString =  mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
+    private fun getFireStorePathString(): String {
+        val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
         return regex.replace(pathString, "")
     }
 
-    fun updateCoarse(coarse : String){
+    fun updateCoarse(coarse: String) {
         mCoarseSelected = coarse
     }
 
-    fun updateYear(year : String){
+    fun updateYear(year: String) {
         mYearSelected = year
     }
 
-    fun getSubjectsOptions() : SubjectsDataClass? {
+    fun getSubjectsOptions(): SubjectsDataClass? {
         return listRealtimeDatabase
     }
 
-    fun updateSubjectOptions(subjectList : SubjectsDataClass) {
+    fun updateSubjectOptions(subjectList: SubjectsDataClass) {
         listRealtimeDatabase = subjectList
     }
 
-    fun getPathString(): String {
+    private fun getRealtimeDatabasePathString(): String {
         val pathString = mCoarseSelected + mYearSelected
         val regex = Regex("[^A-Za-z0-9\t]")
         return regex.replace(pathString, "")
@@ -51,7 +52,7 @@ class SharedViewModel : ViewModel() {
     fun getListFromRealTimeDatabase(
         activity: Application?
     ) {
-        val dbRef = database.child("subjects").child(getPathString())
+        val dbRef = database.child("subjects").child(getRealtimeDatabasePathString())
 
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -64,9 +65,7 @@ class SharedViewModel : ViewModel() {
                         }
                     }
 
-                    //                    setUpRecyclerView(subList)
                     _listFromServer.value = subList
-                    Log.e("testApp","list fetched is $subList")
                 }
             }
 
@@ -84,4 +83,18 @@ class SharedViewModel : ViewModel() {
         return subjectList.find { it.name == name }
     }
 
+    fun callFireStore() {
+        Log.e("testApp","accessing fireStore data is ${getFireStorePathString()}")
+
+        fireStore.collection(getFireStorePathString()).get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("testApp", "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("testApp", "Error getting documents.", exception)
+            }
+
+    }
 }

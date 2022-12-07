@@ -37,6 +37,8 @@ class SubjectFragment : Fragment() {
             setUpRecyclerView(it as MutableList<SubjectsDataClass>?)
         }
 
+        viewModel.callFireStore()
+
         return binding.root
     }
 
