@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
@@ -28,9 +29,11 @@ class DialogBox : DialogFragment() {
             var option3Visibility = false
             var option4Visibility = false
 
+
             viewModel.getSubjectsOptions().let { it ->
                 it?.let {
                     binding.apply {
+
 
                         it.part1Hindi?.let {
                             subjectOption1Hindi.text = it
@@ -68,6 +71,7 @@ class DialogBox : DialogFragment() {
                             option4Visibility = true
 
                         }
+
                     }
                 }
             }
@@ -88,21 +92,25 @@ class DialogBox : DialogFragment() {
             binding.cardView10.setOnClickListener {
                 viewModel.mPartSelected = "part1"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
+                viewModel.callFireStore()
 
             }
             binding.cardView11.setOnClickListener {
                 viewModel.mPartSelected = "part2"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
+                viewModel.callFireStore()
 
             }
             binding.cardView12.setOnClickListener {
                 viewModel.mPartSelected = "part3"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
+                viewModel.callFireStore()
 
             }
             binding.cardView13.setOnClickListener {
                 viewModel.mPartSelected = "part4"
                 findNavController().navigate(R.id.action_subjectFragment_to_askingChapterFragment)
+                viewModel.callFireStore()
 
             }
 

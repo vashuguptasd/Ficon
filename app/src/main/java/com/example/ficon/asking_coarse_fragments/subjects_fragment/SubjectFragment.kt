@@ -26,6 +26,7 @@ class SubjectFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentAskingOptionalBinding.inflate(layoutInflater)
         val activity = requireNotNull(this.activity).application
 
@@ -36,8 +37,6 @@ class SubjectFragment : Fragment() {
         viewModel.listFromServer.observe(viewLifecycleOwner) {
             setUpRecyclerView(it as MutableList<SubjectsDataClass>?)
         }
-
-        viewModel.callFireStore()
 
         return binding.root
     }

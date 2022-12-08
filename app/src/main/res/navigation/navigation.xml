@@ -42,5 +42,13 @@
     <fragment
         android:id="@+id/askingChapterFragment"
         android:name="com.example.ficon.asking_coarse_fragments.askingChapterFragments.AskingChapterFragment"
-        android:label="AskingChapterFragment" />
+        android:label="AskingChapterFragment" >
+        <action
+            android:id="@+id/action_askingChapterFragment_to_holderFragment"
+            app:destination="@id/holderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/holderFragment"
+        android:name="com.example.ficon.pdfFragments.HolderFragment"
+        android:label="HolderFragment" />
 </navigation>

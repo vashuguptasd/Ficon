@@ -7,16 +7,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
+import com.example.ficon.pdfFragments.firestoreDataClass.FireStoreUnitsDataClass
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SharedViewModel : ViewModel() {
+    //Initialising Server
     private var database = FirebaseDatabase.getInstance().reference
     private var fireStore = FirebaseFirestore.getInstance()
+
+    // for calling server specific branch
     private var mCoarseSelected = ""
     private var mYearSelected = ""
     var mSubjectSelected = ""
     var mPartSelected = ""
+
     private var listRealtimeDatabase: SubjectsDataClass? = null
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
     var listFromServer: LiveData<List<SubjectsDataClass>> = _listFromServer
@@ -83,18 +88,22 @@ class SharedViewModel : ViewModel() {
         return subjectList.find { it.name == name }
     }
 
+    //for storing fireStore data
+    private val fireStoreData = MutableLiveData<List<FireStoreUnitsDataClass>>()
+    val _fireStoreData : LiveData<List<FireStoreUnitsDataClass>> = fireStoreData
+
     fun callFireStore() {
-        Log.e("testApp","accessing fireStore data is ${getFireStorePathString()}")
 
         fireStore.collection(getFireStorePathString()).get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    Log.d("testApp", "${document.id} => ${document.data}")
+                    val myObject = result.toObjects(FireStoreUnitsDataClass::class.java)
+                    fireStoreData.value = myObject
+
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w("testApp", "Error getting documents.", exception)
             }
-
     }
 }
