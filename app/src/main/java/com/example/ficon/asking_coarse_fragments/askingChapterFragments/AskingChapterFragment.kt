@@ -36,10 +36,12 @@ class AskingChapterFragment : Fragment() {
             val adapter =  CoarseFragmentRecyclerViewAdapter(33,22, ClickListener {
                 Toast.makeText(application,it.toString(),Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_askingChapterFragment_to_holderFragment)
+                viewModel.chapterClickedOn = it
+
             })
 
             recyclerView.adapter = adapter
-            viewModel._fireStoreData.observe(viewLifecycleOwner, Observer {
+            viewModel.mFireStoreData.observe(viewLifecycleOwner, Observer {
                        adapter.submitList(it.asCoarseModel())
             })
         }

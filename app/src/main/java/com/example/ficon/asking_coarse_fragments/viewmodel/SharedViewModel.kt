@@ -88,9 +88,12 @@ class SharedViewModel : ViewModel() {
         return subjectList.find { it.name == name }
     }
 
+    //to know which unit is clicked in Chapter fragment
+    var chapterClickedOn : String = ""
+
     //for storing fireStore data
     private val fireStoreData = MutableLiveData<List<FireStoreUnitsDataClass>>()
-    val _fireStoreData : LiveData<List<FireStoreUnitsDataClass>> = fireStoreData
+    val mFireStoreData : LiveData<List<FireStoreUnitsDataClass>> = fireStoreData
 
     fun callFireStore() {
 
@@ -105,5 +108,11 @@ class SharedViewModel : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.w("testApp", "Error getting documents.", exception)
             }
+    }
+
+    fun getPreferredUnit( list : List<FireStoreUnitsDataClass>): FireStoreUnitsDataClass {
+        val regex = Regex("[A-Za-z\n ]")
+        val unitNo = regex.replace(chapterClickedOn, "")
+        return list[unitNo.toInt()-1]
     }
 }
