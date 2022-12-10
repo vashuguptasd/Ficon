@@ -54,6 +54,10 @@ dependencies {
 
     // splash Screen
     implementation "androidx.core:core-splashscreen:1.0.0"
+
+    // pdf viewer and PR downloader
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
     
 
 

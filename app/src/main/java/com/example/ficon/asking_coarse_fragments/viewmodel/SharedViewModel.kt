@@ -1,15 +1,23 @@
 package com.example.ficon.asking_coarse_fragments.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.downloader.Error
+import com.downloader.OnDownloadListener
+import com.downloader.PRDownloader
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.example.ficon.pdfFragments.firestoreDataClass.FireStoreUnitsDataClass
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.File
 
 class SharedViewModel : ViewModel() {
     //Initialising Server
@@ -109,10 +117,58 @@ class SharedViewModel : ViewModel() {
                 Log.w("testApp", "Error getting documents.", exception)
             }
     }
-
+    // to get unit data only from list
     fun getPreferredUnit( list : List<FireStoreUnitsDataClass>): FireStoreUnitsDataClass {
         val regex = Regex("[A-Za-z\n ]")
         val unitNo = regex.replace(chapterClickedOn, "")
         return list[unitNo.toInt()-1]
+    }
+
+    // show progressBar on loading data
+    var progressBarVisibility = MutableLiveData<Boolean>()
+
+    //pdf downloaded path
+    var downloadedFilePath = MutableLiveData<File>()
+
+    // download file with PRDownloader
+    fun downloadPdfFromInternet(context : Context,  dirPath: String, fileName: String) {
+        PRDownloader.download(
+            getPdfUrl(),
+            dirPath,
+            fileName
+        ).build()
+            .start(object : OnDownloadListener {
+                override fun onDownloadComplete() {
+                    Toast.makeText(context, "downloadComplete", Toast.LENGTH_LONG)
+                        .show()
+                    val downloadedFile = File(dirPath, fileName)
+                    progressBarVisibility.value = false
+                    downloadedFilePath.value = downloadedFile
+                }
+
+                override fun onError(error: Error?) {
+                    Toast.makeText(
+                        context,
+                        "Error in downloading file : $error",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            })
+    }
+    fun getRootDirPath(context: Context): String {
+        return if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
+            val file: File = ContextCompat.getExternalFilesDirs(
+                context.applicationContext,
+                null
+            )[0]
+            file.absolutePath
+        } else {
+            context.applicationContext.filesDir.absolutePath
+        }
+    }
+    private fun getPdfUrl(): String {
+        return "https://drive.google.com/uc?export=download&id=143fSQ1nlfp8qMOuvYAEVqOjmamOi5sSf"
+
     }
 }

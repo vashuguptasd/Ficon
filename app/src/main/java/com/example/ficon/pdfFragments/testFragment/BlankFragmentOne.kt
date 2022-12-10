@@ -1,60 +1,68 @@
 package com.example.ficon.pdfFragments.testFragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ficon.R
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
+import com.example.ficon.databinding.FragmentBlankOneBinding
+import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BlankFragmentOne.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BlankFragmentOne : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding : FragmentBlankOneBinding
+    private val viewModel: SharedViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank_one, container, false)
+        binding = FragmentBlankOneBinding.inflate(layoutInflater)
+        val application = requireNotNull(this.activity).application
+
+        //observing and showing pdf
+        viewModel.downloadedFilePath.observe(viewLifecycleOwner, Observer {
+            showPdfFromFile(it)
+        })
+
+        // observing and set up progress bar visibility
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner, Observer {
+            if (it){
+                binding.progressBar.visibility = View.VISIBLE
+
+            }
+            else{
+                binding.progressBar.visibility = View.GONE
+
+            }
+        })
+
+        //Setting up progressbar visibility
+        viewModel.progressBarVisibility.value = true
+        viewModel.downloadPdfFromInternet(
+            application,
+            viewModel.getRootDirPath(application),
+            "myFile.pdf"
+        )
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragmentOne.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BlankFragmentOne().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun showPdfFromFile(file: File) {
+        binding.pdfView.fromFile(file)
+            .password(null)
+            .spacing(5)
+            .enableAntialiasing(true)
+            .defaultPage(0)
+            .enableSwipe(true)
+            .swipeHorizontal(false)
+            .enableDoubletap(true)
+            .onPageError { _, _ ->
+                Log.e("testApp","error happen")
             }
+            .load()
     }
 }
