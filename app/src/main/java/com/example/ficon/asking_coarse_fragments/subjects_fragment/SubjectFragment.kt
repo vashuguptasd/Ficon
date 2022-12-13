@@ -34,8 +34,12 @@ class SubjectFragment : Fragment() {
         database.keepSynced(true)
         viewModel.getListFromRealTimeDatabase(activity)
 
+        binding.progressBar2.visibility = View.VISIBLE
+
+
         viewModel.listFromServer.observe(viewLifecycleOwner) {
             setUpRecyclerView(it as MutableList<SubjectsDataClass>?)
+            binding.progressBar2.visibility = View.GONE
         }
 
         return binding.root
