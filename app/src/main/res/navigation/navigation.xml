@@ -29,7 +29,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_askingYearFragment_to_subjectFragment"
-            app:destination="@id/subjectFragment" />
+            app:destination="@id/subjectFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/subjectFragment"
@@ -37,7 +41,11 @@
         android:label="SubjectFragment" >
         <action
             android:id="@+id/action_subjectFragment_to_askingChapterFragment"
-            app:destination="@id/askingChapterFragment" />
+            app:destination="@id/askingChapterFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/askingChapterFragment"
@@ -45,7 +53,11 @@
         android:label="AskingChapterFragment" >
         <action
             android:id="@+id/action_askingChapterFragment_to_holderFragment"
-            app:destination="@id/holderFragment" />
+            app:destination="@id/holderFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/holderFragment"

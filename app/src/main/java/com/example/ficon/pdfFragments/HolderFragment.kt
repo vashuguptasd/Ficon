@@ -26,9 +26,9 @@ class HolderFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHolderBinding.inflate(layoutInflater)
 
-        viewModel.mFireStoreData.observe(viewLifecycleOwner, Observer {
-            Log.e("testApp","list getting is ${viewModel.getPreferredUnit(it)}")
-        })
+//        viewModel.mFireStoreData.observe(viewLifecycleOwner, Observer {
+//            Log.e("testApp","list getting is ${viewModel.getPreferredUnit(it)}")
+//        })
 
 
 

@@ -18,7 +18,7 @@ import com.example.ficon.pdfFragments.firestoreDataClass.FireStoreUnitsDataClass
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
-
+const val LOG = "testApp"
 class SharedViewModel : ViewModel() {
     //Initialising Server
     private var database = FirebaseDatabase.getInstance().reference
@@ -118,7 +118,7 @@ class SharedViewModel : ViewModel() {
             }
     }
     // to get unit data only from list
-    fun getPreferredUnit( list : List<FireStoreUnitsDataClass>): FireStoreUnitsDataClass {
+    private fun getPreferredUnit( list : List<FireStoreUnitsDataClass>): FireStoreUnitsDataClass {
         val regex = Regex("[A-Za-z\n ]")
         val unitNo = regex.replace(chapterClickedOn, "")
         return list[unitNo.toInt()-1]
@@ -131,9 +131,9 @@ class SharedViewModel : ViewModel() {
     var downloadedFilePath = MutableLiveData<File>()
 
     // download file with PRDownloader
-    fun downloadPdfFromInternet(context : Context,  dirPath: String, fileName: String) {
+    fun downloadPdfFromInternet(context : Context, category: String, dirPath: String, fileName: String) {
         PRDownloader.download(
-            getPdfUrl(),
+            getPdfUrl(category),
             dirPath,
             fileName
         ).build()
@@ -144,6 +144,7 @@ class SharedViewModel : ViewModel() {
                     val downloadedFile = File(dirPath, fileName)
                     progressBarVisibility.value = false
                     downloadedFilePath.value = downloadedFile
+                    syllabusDownloaded.value = true
                 }
 
                 override fun onError(error: Error?) {
@@ -167,8 +168,33 @@ class SharedViewModel : ViewModel() {
             context.applicationContext.filesDir.absolutePath
         }
     }
-    private fun getPdfUrl(): String {
-        return "https://drive.google.com/uc?export=download&id=143fSQ1nlfp8qMOuvYAEVqOjmamOi5sSf"
+
+    private fun getPdfUrl(category: String): String? {
+        val syllabus = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().syllabus
+        val solved = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().solved
+        val unSolved = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().unSolved
+        val notes = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().notes
+        val book = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().book
+
+
+
+        return when (category){
+            "syllabus" -> syllabus.first?.syllabus
+            "solved" -> solved.first?.syllabus
+            "unSolved" -> unSolved.first?.syllabus
+            "notes" -> notes.first?.syllabus
+            "book" -> book.first?.syllabus
+
+            else -> {"https://www.orimi.com/pdf-test.pdf"}
+        }
 
     }
+
+    // logic to download pdf only once
+    var syllabusDownloaded = MutableLiveData<Boolean>()
+
+    init {
+        syllabusDownloaded.value = false
+    }
+
 }
