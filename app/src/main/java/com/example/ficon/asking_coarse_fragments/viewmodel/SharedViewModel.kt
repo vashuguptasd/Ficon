@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.os.Environment
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -128,7 +127,43 @@ class SharedViewModel : ViewModel() {
     var progressBarVisibility = MutableLiveData<Boolean>()
 
     //pdf downloaded path
-    var downloadedFilePath = MutableLiveData<File>()
+    var downloadedFilePathSyllabus = MutableLiveData<File>()
+
+    //pdf downloaded path
+    var downloadedFilePathSolved = MutableLiveData<File>()
+
+    //pdf downloaded path
+    var downloadedFilePathUnSolved = MutableLiveData<File>()
+
+    //pdf downloaded path
+    var downloadedFilePathNotes = MutableLiveData<File>()
+
+    //pdf downloaded path
+    var downloadedFilePathBooks = MutableLiveData<File>()
+
+    // logic to download pdf only once
+    var syllabusDownloaded = MutableLiveData<Boolean>()
+
+    // logic to download pdf only once
+    var solvedDownloaded = MutableLiveData<Boolean>()
+
+    // logic to download pdf only once
+    var unSolvedDownloaded = MutableLiveData<Boolean>()
+
+    // logic to download pdf only once
+    var notesDownloaded = MutableLiveData<Boolean>()
+
+    // logic to download pdf only once
+    var booksDownloaded = MutableLiveData<Boolean>()
+
+
+    init {
+        syllabusDownloaded.value = false
+        solvedDownloaded.value = false
+        unSolvedDownloaded.value = false
+        notesDownloaded.value = false
+        booksDownloaded.value = false
+    }
 
     // download file with PRDownloader
     fun downloadPdfFromInternet(context : Context, category: String, dirPath: String, fileName: String) {
@@ -143,8 +178,27 @@ class SharedViewModel : ViewModel() {
                         .show()
                     val downloadedFile = File(dirPath, fileName)
                     progressBarVisibility.value = false
-                    downloadedFilePath.value = downloadedFile
-                    syllabusDownloaded.value = true
+
+                    Log.e(LOG,"download link is ${getPdfUrl(category)}")
+
+                    when(category){
+                        "syllabus" -> {downloadedFilePathSyllabus.value = downloadedFile
+                            syllabusDownloaded.value = true}
+
+                        "solved" -> {downloadedFilePathSolved.value = downloadedFile
+                            solvedDownloaded.value = true}
+
+                        "unSolved" -> {downloadedFilePathUnSolved.value = downloadedFile
+                            unSolvedDownloaded.value = true}
+
+                        "notes" -> {downloadedFilePathNotes.value = downloadedFile
+                            notesDownloaded.value = true}
+
+                        "book" -> {downloadedFilePathBooks.value = downloadedFile
+                            booksDownloaded.value = true}
+
+                    }
+
                 }
 
                 override fun onError(error: Error?) {
@@ -157,6 +211,7 @@ class SharedViewModel : ViewModel() {
                 }
             })
     }
+
     fun getRootDirPath(context: Context): String {
         return if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
             val file: File = ContextCompat.getExternalFilesDirs(
@@ -180,21 +235,16 @@ class SharedViewModel : ViewModel() {
 
         return when (category){
             "syllabus" -> syllabus.first?.syllabus
-            "solved" -> solved.first?.syllabus
-            "unSolved" -> unSolved.first?.syllabus
-            "notes" -> notes.first?.syllabus
-            "book" -> book.first?.syllabus
+            "solved" -> solved.first?.solved
+            "unSolved" -> unSolved.first?.unSolved
+            "notes" -> notes.first?.notes
+            "book" -> book.first?.book
 
             else -> {"https://www.orimi.com/pdf-test.pdf"}
         }
-
     }
 
-    // logic to download pdf only once
-    var syllabusDownloaded = MutableLiveData<Boolean>()
 
-    init {
-        syllabusDownloaded.value = false
-    }
+
 
 }

@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentBlankOneBinding
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
-import com.github.barteksc.pdfviewer.scroll.ScrollHandle
 import java.io.File
 
 class BlankFragmentOne : Fragment() {
@@ -29,7 +28,7 @@ class BlankFragmentOne : Fragment() {
         val application = requireNotNull(this.activity).application
 
         //observing and showing pdf
-        viewModel.downloadedFilePath.observe(viewLifecycleOwner, Observer {
+        viewModel.downloadedFilePathSyllabus.observe(viewLifecycleOwner, Observer {
             showPdfFromFile(it)
         })
 
@@ -48,8 +47,9 @@ class BlankFragmentOne : Fragment() {
         //Setting up progressbar visibility
         viewModel.progressBarVisibility.value = true
 
+
         if (viewModel.syllabusDownloaded.value == true){
-            viewModel.downloadedFilePath.value?.let { showPdfFromFile(it) }
+            viewModel.downloadedFilePathSyllabus.value?.let { showPdfFromFile(it) }
             binding.progressBar.visibility = View.GONE
         }else{
             viewModel.downloadPdfFromInternet(
@@ -59,7 +59,6 @@ class BlankFragmentOne : Fragment() {
                 "myFile.pdf"
             )
         }
-
 
         return binding.root
     }
@@ -78,5 +77,8 @@ class BlankFragmentOne : Fragment() {
                 Log.e("testApp","error happen")
             }
             .load()
+
     }
+
+
 }
