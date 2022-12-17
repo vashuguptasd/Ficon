@@ -37,35 +37,10 @@ class SharedViewModel : ViewModel() {
     private fun getFireStorePathString(): String {
         val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
-        val finalString =  regex.replace(pathString, "")
-//        createDatabaseInstance(finalString)
-        return finalString
+        return regex.replace(pathString, "")
 
     }
 
-//    private fun createDatabaseInstance(finalString: String) {
-//        val data = hashMapOf(
-//                "unitNameHin" to "Unit 1",
-//                "unitNameEng" to "Unit 1",
-//                "syllabus" to "syllabus",
-//                "solved" to "solved",
-//                "unSolved" to "unSolved",
-//                "notes" to "notes",
-//                "books" to "books"
-//        )
-//        val list = listOf("Unit 1","Unit 2","Unit 3","Unit 4","Unit 5")
-//
-//        for (unit in list){
-//            fireStore.collection(finalString).document(unit).set(data).addOnSuccessListener {
-//                Log.e(LOG,"upload successful")
-//            }.addOnFailureListener {
-//                Log.e(LOG,"upload failed ${it.toString()}")
-//            }
-//        }
-//        Log.e(LOG,"...............")
-//
-//
-//    }
 
     fun updateCoarse(coarse: String) {
         mCoarseSelected = coarse
@@ -199,6 +174,7 @@ class SharedViewModel : ViewModel() {
 
     // download file with PRDownloader
     fun downloadPdfFromInternet(context : Context, category: String, dirPath: String, fileName: String) {
+
         PRDownloader.download(
             getPdfUrl(category),
             dirPath,

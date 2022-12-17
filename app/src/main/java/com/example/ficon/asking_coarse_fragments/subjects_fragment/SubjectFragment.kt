@@ -45,12 +45,11 @@ class SubjectFragment : Fragment() {
         return binding.root
     }
 
-
     private fun setUpRecyclerView(subList: MutableList<SubjectsDataClass>?) {
         binding.apply {
 
             val recyclerView = selectYourYearRecyclerView
-            adapter = CoarseFragmentRecyclerViewAdapter(37, 17, ClickListener {
+            adapter = CoarseFragmentRecyclerViewAdapter(33, 17, ClickListener {
                 viewModel.mSubjectSelected = it
                 if (subList != null) {
                     viewModel.getSubjectFromList(it,subList)?.let { it1 -> viewModel.updateSubjectOptions(it1) }

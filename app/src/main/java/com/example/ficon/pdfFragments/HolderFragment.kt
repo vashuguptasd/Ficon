@@ -162,9 +162,9 @@ class HolderFragment : Fragment() {
         } else {
             viewModel.downloadPdfFromInternet(
                     application,
-                    "books",
+                    "book",
                     viewModel.getRootDirPath(application),
-                    "books.pdf"
+                    "book.pdf"
             )
             viewModel.booksDownloaded.value = true
         }
