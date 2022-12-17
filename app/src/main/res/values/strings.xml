@@ -11,4 +11,10 @@
     <string name="year_wise">Year Wise</string>
     <string name="semester_wise">Semester Wise</string>
     <string name="choose_your_subject">Choose Your Subject</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="solved">Solved</string>
+    <string name="unsolved">UnSolved</string>
+    <string name="notes">Notes</string>
+    <string name="books">Books</string>
+    <string name="pyq">PYQ</string>
 </resources>

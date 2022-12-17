@@ -33,10 +33,38 @@ class SharedViewModel : ViewModel() {
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
     var listFromServer: LiveData<List<SubjectsDataClass>> = _listFromServer
 
+    // get fireStore data string
     private fun getFireStorePathString(): String {
         val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
-        return regex.replace(pathString, "")
+        val finalString =  regex.replace(pathString, "")
+        createDatabaseInstance(finalString)
+        return finalString
+
+    }
+
+    private fun createDatabaseInstance(finalString: String) {
+        val data = hashMapOf(
+                "unitNameHin" to "Unit 1",
+                "unitNameEng" to "Unit 1",
+                "syllabus" to "syllabus",
+                "solved" to "solved",
+                "unSolved" to "unSolved",
+                "notes" to "notes",
+                "books" to "books"
+        )
+        val list = listOf("Unit 1","Unit 2","Unit 3","Unit 4","Unit 5")
+
+        for (unit in list){
+            fireStore.collection(finalString).document(unit).set(data).addOnSuccessListener {
+                Log.e(LOG,"upload successful")
+            }.addOnFailureListener {
+                Log.e(LOG,"upload failed ${it.toString()}")
+            }
+        }
+        Log.e(LOG,"...............")
+
+
     }
 
     fun updateCoarse(coarse: String) {
@@ -55,12 +83,14 @@ class SharedViewModel : ViewModel() {
         listRealtimeDatabase = subjectList
     }
 
+    // get path for subjects on realtime database
     private fun getRealtimeDatabasePathString(): String {
         val pathString = mCoarseSelected + mYearSelected
         val regex = Regex("[^A-Za-z0-9\t]")
         return regex.replace(pathString, "")
     }
 
+    // get subjects and name of subjects
     fun getListFromRealTimeDatabase(
         activity: Application?
     ) {
@@ -116,6 +146,7 @@ class SharedViewModel : ViewModel() {
                 Log.w("testApp", "Error getting documents.", exception)
             }
     }
+
     // to get unit data only from list
     private fun getPreferredUnit( list : List<FireStoreUnitsDataClass>): FireStoreUnitsDataClass {
         val regex = Regex("[A-Za-z\n ]")
@@ -158,6 +189,7 @@ class SharedViewModel : ViewModel() {
 
 
     init {
+        progressBarVisibility.value = true
         syllabusDownloaded.value = false
         solvedDownloaded.value = false
         unSolvedDownloaded.value = false
@@ -177,9 +209,6 @@ class SharedViewModel : ViewModel() {
                     Toast.makeText(context, "downloadComplete", Toast.LENGTH_LONG)
                         .show()
                     val downloadedFile = File(dirPath, fileName)
-                    progressBarVisibility.value = false
-
-                    Log.e(LOG,"download link is ${getPdfUrl(category)}")
 
                     when(category){
                         "syllabus" -> {downloadedFilePathSyllabus.value = downloadedFile

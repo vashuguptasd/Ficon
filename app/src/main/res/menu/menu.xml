@@ -2,15 +2,23 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Syllabus"
-        android:id="@+id/blankFragmentOne"
-        android:icon="@mipmap/ic_launcher_round"
-        />
-    <item android:title="Solved"
-        android:id="@+id/blankFragmentTwo"
-        android:icon="@mipmap/ic_launcher_round"/>
+    <item android:title="@string/syllabus"
+        android:id="@+id/askingCoarseFragment"
+        android:icon="@drawable/syllabus" />
 
-    <item android:title="Unsolved"
-        android:id="@+id/blankFragmentThree"
-        android:icon="@mipmap/ic_launcher_round"/>
+    <item android:title="@string/solved"
+        android:id="@+id/askingYearFragment"
+        android:icon="@drawable/solved"/>
+
+    <item android:title="@string/pyq"
+        android:id="@+id/subjectFragment"
+        android:icon="@drawable/un_solved"/>
+
+    <item android:title="@string/notes"
+        android:id="@+id/askingChapterFragment"
+        android:icon="@drawable/notes"/>
+
+    <item android:title="@string/books"
+        android:id="@+id/holderFragment"
+        android:icon="@drawable/book"/>
 </menu>

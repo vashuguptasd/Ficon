@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
@@ -28,17 +29,39 @@ class HolderFragment : Fragment() {
         binding = FragmentHolderBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
+        //show progressbar
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner){
+            if (it){
+                binding.progressBar4.visibility = View.VISIBLE
+            }else{
+                binding.progressBar4.visibility = View.GONE
+            }
+        }
+
         binding.apply {
 
-
+            // setting up bottom navigation bar
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.blankFragmentOne -> downloadSyllabus(application)
-                    R.id.blankFragmentTwo -> downloadSolved(application)
-                    R.id.blankFragmentThree -> downloadUnSolved(application)
+                    R.id.askingCoarseFragment -> {
+                        downloadSyllabus(application)
+                    }
+                    R.id.askingYearFragment -> {
+                        downloadSolved(application)
+                    }
+                    R.id.subjectFragment -> {
+                        downloadUnSolved(application)
+                    }
+                    R.id.askingChapterFragment -> {
+                        downloadNotes(application)
+                    }
+                    R.id.holderFragment -> {
+                        downloadBooks(application)
+                    }
                 }
                 true
             }
+
 
             //observing and showing pdf
             viewModel.downloadedFilePathSyllabus.observe(viewLifecycleOwner) {
@@ -51,32 +74,27 @@ class HolderFragment : Fragment() {
             //observing and showing pdf
             viewModel.downloadedFilePathUnSolved.observe(viewLifecycleOwner) {
                 showPdfFromFile(it)
-                Log.e(LOG, "downloaded file is $it")
 
             }
             //observing and showing pdf
             viewModel.downloadedFilePathNotes.observe(viewLifecycleOwner) {
                 showPdfFromFile(it)
-                Log.e(LOG, "downloaded file is $it")
 
             }
             //observing and showing pdf
             viewModel.downloadedFilePathBooks.observe(viewLifecycleOwner) {
                 showPdfFromFile(it)
-                Log.e(LOG, "downloaded file is $it")
 
             }
-
-//          downloading syllabus for initialising
-            downloadUnSolved(application)
-//          downloadSyllabus(application)
-//          downloadSolved(application)
+            // initialising With syllabus
+            downloadSyllabus(application)
         }
 
         return binding.root
     }
 
     private fun downloadSyllabus(application: Application) {
+        viewModel.progressBarVisibility.value = true
         if (viewModel.syllabusDownloaded.value == true) {
             viewModel.downloadedFilePathSyllabus.value?.let {
                 showPdfFromFile(it)
@@ -93,6 +111,7 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadSolved(application: Application) {
+        viewModel.progressBarVisibility.value = true
         if (viewModel.solvedDownloaded.value == true) {
             viewModel.downloadedFilePathSolved.value?.let { showPdfFromFile(it) }
         } else {
@@ -104,10 +123,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.solvedDownloaded.value = true
         }
-        viewModel.downloadedFilePathSolved.value?.let { showPdfFromFile(it) }
     }
 
     private fun downloadUnSolved(application: Application) {
+        viewModel.progressBarVisibility.value = true
         if (viewModel.unSolvedDownloaded.value == true) {
             viewModel.downloadedFilePathUnSolved.value?.let { showPdfFromFile(it) }
         } else {
@@ -119,10 +138,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.unSolvedDownloaded.value = true
         }
-        viewModel.downloadedFilePathUnSolved.value?.let { showPdfFromFile(it) }
     }
 
     private fun downloadNotes(application: Application) {
+        viewModel.progressBarVisibility.value = true
         if (viewModel.notesDownloaded.value == true) {
             viewModel.downloadedFilePathNotes.value?.let { showPdfFromFile(it) }
         } else {
@@ -134,10 +153,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.notesDownloaded.value = true
         }
-        viewModel.downloadedFilePathNotes.value?.let { showPdfFromFile(it) }
     }
 
     private fun downloadBooks(application: Application) {
+        viewModel.progressBarVisibility.value = true
         if (viewModel.booksDownloaded.value == true) {
             viewModel.downloadedFilePathBooks.value?.let { showPdfFromFile(it) }
         } else {
@@ -149,7 +168,6 @@ class HolderFragment : Fragment() {
             )
             viewModel.booksDownloaded.value = true
         }
-        viewModel.downloadedFilePathBooks.value?.let { showPdfFromFile(it) }
     }
 
     private fun showPdfFromFile(file: File) {
@@ -166,6 +184,8 @@ class HolderFragment : Fragment() {
                     Log.e("testApp", "error loading page on${page.toString()} and error ${error.toString()} ")
                 }
                 .load()
+        viewModel.progressBarVisibility.value = false
     }
+
 
 }

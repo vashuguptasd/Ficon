@@ -63,16 +63,4 @@
         android:id="@+id/holderFragment"
         android:name="com.example.ficon.pdfFragments.HolderFragment"
         android:label="HolderFragment" />
-    <fragment
-        android:id="@+id/blankFragmentOne"
-        android:name="com.example.ficon.pdfFragments.testFragment.BlankFragmentOne"
-        android:label="BlankFragmentOne" />
-    <fragment
-        android:id="@+id/blankFragmentTwo"
-        android:name="com.example.ficon.pdfFragments.testFragment.BlankFragmentTwo"
-        android:label="BlankFragmentTwo" />
-    <fragment
-        android:id="@+id/blankFragmentThree"
-        android:name="com.example.ficon.pdfFragments.testFragment.BlankFragmentThree"
-        android:label="BlankFragmentThree" />
 </navigation>
