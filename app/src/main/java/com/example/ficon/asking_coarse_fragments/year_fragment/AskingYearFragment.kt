@@ -41,14 +41,39 @@ class AskingYearFragment : Fragment() {
             val text = it.text
             it.setOnClickListener {
                 viewModel.updateYear(text.toString())
-                findNavController().navigate(R.id.action_askingYearFragment_to_subjectFragment)
+//                findNavController().navigate(R.id.action_askingYearFragment_to_subjectFragment)
                 Toast.makeText(activity,text.toString(),Toast.LENGTH_SHORT).show()
 
 
             }
         }
 
+        // hiding sem in Batchelor and Part in Masters subject
+        val coarse = viewModel.mCoarseSelected
+        if (coarse=="B.Sc"||coarse=="B.A"||coarse=="B.Com"){
+            hideSemester()
+        }else{
+            hideParts()
+        }
+
         return binding.root
+    }
+
+    private fun hideParts() {
+        binding.cardView.visibility = View.GONE
+        binding.cardView2.visibility = View.GONE
+        binding.cardView3.visibility = View.GONE
+        binding.textView.visibility = View.GONE
+    }
+
+    private fun hideSemester() {
+        binding.textView3.visibility = View.GONE
+        binding.cardView4.visibility = View.GONE
+        binding.cardView5.visibility = View.GONE
+        binding.cardView6.visibility = View.GONE
+        binding.cardView7.visibility = View.GONE
+        binding.cardView8.visibility = View.GONE
+        binding.cardView9.visibility = View.GONE
     }
 }
 

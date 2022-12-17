@@ -12,28 +12,17 @@
         android:label="fragment_asking_coarse"
         tools:layout="@layout/fragment_asking_coarse" >
         <action
-            android:id="@+id/action_askingCoarseFragment_to_askingYearFragment"
-            app:destination="@id/askingYearFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/askingYearFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.year_fragment.AskingYearFragment"
-        android:label="fragment_asking_year"
-        tools:layout="@layout/fragment_asking_year" >
-        <argument
-            android:name="main_coarse"
-            app:argType="string" />
+            android:id="@+id/action_askingCoarseFragment_to_subjectFragment"
+            app:destination="@id/subjectFragment" />
         <action
-            android:id="@+id/action_askingYearFragment_to_subjectFragment"
-            app:destination="@id/subjectFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            android:id="@+id/action_askingCoarseFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment" />
+        <action
+            android:id="@+id/action_askingCoarseFragment_to_subjectFragment3"
+            app:destination="@id/subjectFragment" />
+        <action
+            android:id="@+id/action_askingCoarseFragment_to_subjectFragment4"
+            app:destination="@id/subjectFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectFragment"

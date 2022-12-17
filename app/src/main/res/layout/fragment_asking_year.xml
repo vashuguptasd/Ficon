@@ -3,12 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradiant">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/gradiant"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -19,7 +16,7 @@
                     style="@style/TextAppearance.Material3.HeadlineMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/year_wise"
+                    android:text="@string/choose_year"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +72,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/semester_wise"
+                    android:text="@string/choose_semester"
                     android:textColor="@color/black"
                     style="@style/TextAppearance.Material3.HeadlineMedium"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +176,14 @@
                         android:text="Semester 5"/>
                 </com.google.android.material.card.MaterialCardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </ScrollView>
 
 
 </layout>
