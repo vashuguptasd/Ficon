@@ -1,5 +1,6 @@
 package com.example.ficon.pdfFragments
 
+import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
@@ -28,6 +28,10 @@ class HolderFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHolderBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
+
+//        // showing ads
+//        Log.e(LOG,"activity is ${Activity().parent.toString()}")
+//        viewModel.showAds(Activity().parent)
 
         //show progressbar
         viewModel.progressBarVisibility.observe(viewLifecycleOwner){
@@ -58,6 +62,7 @@ class HolderFragment : Fragment() {
                     R.id.holderFragment -> {
                         downloadBooks(application)
                     }
+
                 }
                 true
             }

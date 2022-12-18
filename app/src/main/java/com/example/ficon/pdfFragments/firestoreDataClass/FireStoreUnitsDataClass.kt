@@ -1,7 +1,6 @@
 package com.example.ficon.pdfFragments.firestoreDataClass
 
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseDataClass
-import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 
 data class FireStoreUnitsDataClass (
 
@@ -11,8 +10,9 @@ data class FireStoreUnitsDataClass (
     val solved : String? = null,
     val unSolved : String? = null,
     val syllabus : String? = null,
-    val book : String? = null,
-    val notes : String? = null
+    val books : String? = null,
+    val notes : String? = null,
+    val copyright : String? = null
 
 )
 

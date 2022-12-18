@@ -13,9 +13,7 @@
         tools:context=".asking_coarse_fragments.coarse_fragment.AskingCoarseFragment">
 
 
-
         <TextView
-
             android:id="@+id/textView2"
             android:textStyle="bold"
             style="@style/TextAppearance.Material3.HeadlineSmall"

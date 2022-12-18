@@ -20,4 +20,6 @@
     <string name="fab">fab</string>
     <string name="choose_year">Choose Year</string>
     <string name="choose_semester">Choose Semester</string>
+    <string name="copyright">Copyright</string>
+    <string name="app_info">App Info</string>
 </resources>

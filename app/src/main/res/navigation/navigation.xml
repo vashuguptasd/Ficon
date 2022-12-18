@@ -22,7 +22,18 @@
             app:destination="@id/subjectFragment" />
         <action
             android:id="@+id/action_askingCoarseFragment_to_subjectFragment4"
-            app:destination="@id/subjectFragment" />
+            app:destination="@id/subjectFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
+        <action
+            android:id="@+id/action_askingCoarseFragment_to_copyRightFragment"
+            app:destination="@id/copyRightFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/subjectFragment"
@@ -52,4 +63,8 @@
         android:id="@+id/holderFragment"
         android:name="com.example.ficon.pdfFragments.HolderFragment"
         android:label="HolderFragment" />
+    <fragment
+        android:id="@+id/copyRightFragment"
+        android:name="com.example.ficon.asking_coarse_fragments.copyrightFragment.CopyRightFragment"
+        android:label="CopyRightFragment" />
 </navigation>

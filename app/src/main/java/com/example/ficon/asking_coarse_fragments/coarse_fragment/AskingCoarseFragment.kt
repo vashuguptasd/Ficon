@@ -1,9 +1,9 @@
 package com.example.ficon.asking_coarse_fragments.coarse_fragment
 
+import android.app.Activity
 import android.app.Application
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +17,18 @@ import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickList
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseDataClass
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
 import com.example.ficon.asking_coarse_fragments.asking_year_dialog.AskingYearDialog
-import com.example.ficon.asking_coarse_fragments.dialog_box.DialogBox
+import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentAskingCoarseBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class AskingCoarseFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
-
     private lateinit var binding: FragmentAskingCoarseBinding
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +44,10 @@ class AskingCoarseFragment : Fragment() {
     }
 
     private fun FragmentAskingCoarseBinding.setUpRecyclerView(application: Application?): View {
+
         val recyclerView = chooseCoarseRecyclerView
-        val adapter = CoarseFragmentRecyclerViewAdapter(33, 13, ClickListener {
+        val adapter = CoarseFragmentRecyclerViewAdapter(34, 16, ClickListener {
             viewModel.updateCoarse(it)
-            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
-//            findNavController().navigate(R.id.action_askingCoarseFragment_to_askingYearFragment)
             val dialogBox = AskingYearDialog()
             dialogBox.show(childFragmentManager,"dialog")
 
@@ -68,24 +71,12 @@ class AskingCoarseFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(application, 2)
         lifecycleOwner = lifecycleOwner
 
+
         // setting up floating action button
         binding.floatingActionButton.setOnClickListener {
-            sendEmailIntent()
+            findNavController().navigate(R.id.action_askingCoarseFragment_to_copyRightFragment)
         }
+
         return binding.root
     }
-
-
-    // send email intent
-    private fun sendEmailIntent() {
-        val emailIntent = Intent(
-                Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto", "ficonsupport@gmail.com", null
-        )
-        )
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "add my course ")
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "add my coarse")
-        startActivity(Intent.createChooser(emailIntent, "Send email..."))
-    }
-
 }

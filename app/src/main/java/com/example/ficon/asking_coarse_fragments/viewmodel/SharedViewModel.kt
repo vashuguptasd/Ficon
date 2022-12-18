@@ -1,5 +1,6 @@
 package com.example.ficon.asking_coarse_fragments.viewmodel
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Environment
@@ -14,9 +15,14 @@ import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.example.ficon.pdfFragments.firestoreDataClass.FireStoreUnitsDataClass
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
+
 const val LOG = "testApp"
 class SharedViewModel : ViewModel() {
     //Initialising Server
@@ -40,7 +46,6 @@ class SharedViewModel : ViewModel() {
         return regex.replace(pathString, "")
 
     }
-
 
     fun updateCoarse(coarse: String) {
         mCoarseSelected = coarse
@@ -70,7 +75,6 @@ class SharedViewModel : ViewModel() {
         activity: Application?
     ) {
         val dbRef = database.child("subjects").child(getRealtimeDatabasePathString())
-
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -81,7 +85,6 @@ class SharedViewModel : ViewModel() {
                             subList.add(data)
                         }
                     }
-
                     _listFromServer.value = subList
                 }
             }
@@ -108,7 +111,6 @@ class SharedViewModel : ViewModel() {
     val mFireStoreData : LiveData<List<FireStoreUnitsDataClass>> = fireStoreData
 
     fun callFireStore() {
-
         fireStore.collection(getFireStorePathString()).get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -163,18 +165,9 @@ class SharedViewModel : ViewModel() {
     var booksDownloaded = MutableLiveData<Boolean>()
 
 
-    init {
-        progressBarVisibility.value = true
-        syllabusDownloaded.value = false
-        solvedDownloaded.value = false
-        unSolvedDownloaded.value = false
-        notesDownloaded.value = false
-        booksDownloaded.value = false
-    }
 
     // download file with PRDownloader
     fun downloadPdfFromInternet(context : Context, category: String, dirPath: String, fileName: String) {
-
         PRDownloader.download(
             getPdfUrl(category),
             dirPath,
@@ -203,7 +196,6 @@ class SharedViewModel : ViewModel() {
                             booksDownloaded.value = true}
 
                     }
-
                 }
 
                 override fun onError(error: Error?) {
@@ -234,7 +226,7 @@ class SharedViewModel : ViewModel() {
         val solved = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().solved
         val unSolved = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().unSolved
         val notes = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().notes
-        val book = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().book
+        val book = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().books
 
 
 
@@ -243,13 +235,47 @@ class SharedViewModel : ViewModel() {
             "solved" -> solved.first?.solved
             "unSolved" -> unSolved.first?.unSolved
             "notes" -> notes.first?.notes
-            "book" -> book.first?.book
+            "book" -> book.first?.books
+
 
             else -> {"https://www.orimi.com/pdf-test.pdf"}
         }
     }
 
 
+    // initialising parameters
+    init {
+        progressBarVisibility.value = true
+        syllabusDownloaded.value = false
+        solvedDownloaded.value = false
+        unSolvedDownloaded.value = false
+        notesDownloaded.value = false
+        booksDownloaded.value = false
+    }
 
+    // making ads available public to show
+    var mInterstitialAd: InterstitialAd? = null
 
+    // initializing ads
+    fun initialiseAds(application: Application) {
+        Log.e(LOG,"calling initialise ads")
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(application,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.e(LOG,"error loading ad")
+                mInterstitialAd = null
+            }
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d(LOG, "Ad loaded")
+                mInterstitialAd = interstitialAd
+            }
+        })
+    }
+    fun showAds(parent: Activity) {
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(parent)
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.")
+        }
+    }
 }
