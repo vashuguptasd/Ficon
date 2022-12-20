@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.ficon.R
@@ -21,6 +22,27 @@ class HolderFragment : Fragment() {
     private lateinit var binding: FragmentHolderBinding
     private val viewModel: SharedViewModel by activityViewModels()
 
+    // logic for pdf not changing on changing unit on back click
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // setting all pdf as not downloaded
+                setUpAppPdfDownloadedFalse()
+                isEnabled = false
+                activity?.onBackPressed()
+            }
+
+            private fun setUpAppPdfDownloadedFalse() {
+                viewModel.solvedDownloaded.value = false
+                viewModel.unSolvedDownloaded.value = false
+                viewModel.syllabusDownloaded.value = false
+                viewModel.booksDownloaded.value = false
+                viewModel.notesDownloaded.value = false
+            }
+        })
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -29,15 +51,27 @@ class HolderFragment : Fragment() {
         binding = FragmentHolderBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
-//        // showing ads
-//        Log.e(LOG,"activity is ${Activity().parent.toString()}")
-//        viewModel.showAds(Activity().parent)
+        // showing error downloading file on download fail
+        viewModel.errorDownloadingText.observe(viewLifecycleOwner){
+            if(it){
+                binding.loadingTextView.visibility = View.VISIBLE
+                binding.loadingTextView.text = getString(R.string.download_fail)
+            }
+            else{
+                binding.loadingTextView.visibility = View.VISIBLE
+                binding.loadingTextView.text = getString(R.string.loading)
+            }
+        }
+
 
         //show progressbar
+        //show loading text view
         viewModel.progressBarVisibility.observe(viewLifecycleOwner){
             if (it){
+                binding.loadingTextView.visibility = View.VISIBLE
                 binding.progressBar4.visibility = View.VISIBLE
             }else{
+                binding.loadingTextView.visibility = View.GONE
                 binding.progressBar4.visibility = View.GONE
             }
         }
@@ -48,25 +82,33 @@ class HolderFragment : Fragment() {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.askingCoarseFragment -> {
+                        // resetting downloading text view
+                        viewModel.errorDownloadingText.value = false
                         downloadSyllabus(application)
                     }
                     R.id.askingYearFragment -> {
+                        // resetting downloading text view
+                        viewModel.errorDownloadingText.value = false
                         downloadSolved(application)
                     }
                     R.id.subjectFragment -> {
+                        // resetting downloading text view
+                        viewModel.errorDownloadingText.value = false
                         downloadUnSolved(application)
                     }
                     R.id.askingChapterFragment -> {
+                        // resetting downloading text view
+                        viewModel.errorDownloadingText.value = false
                         downloadNotes(application)
                     }
                     R.id.holderFragment -> {
+                        // resetting downloading text view
+                        viewModel.errorDownloadingText.value = false
                         downloadBooks(application)
                     }
-
                 }
                 true
             }
-
 
             //observing and showing pdf
             viewModel.downloadedFilePathSyllabus.observe(viewLifecycleOwner) {
@@ -91,8 +133,8 @@ class HolderFragment : Fragment() {
                 showPdfFromFile(it)
 
             }
-            // initialising With syllabus
-            downloadSyllabus(application)
+            // initialising With solved
+            downloadSolved(application)
         }
 
         return binding.root
@@ -191,6 +233,5 @@ class HolderFragment : Fragment() {
                 .load()
         viewModel.progressBarVisibility.value = false
     }
-
 
 }

@@ -65,7 +65,6 @@ class AskingCoarseFragment : Fragment() {
                         CoarseDataClass("B.C.A", "Batchelor of Computer App.."),
                         CoarseDataClass("M.C.A", "Master of Computer App..")
 
-
                 )
         )
         recyclerView.layoutManager = GridLayoutManager(application, 2)

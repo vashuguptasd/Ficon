@@ -30,7 +30,7 @@ class CopyRightFragment : Fragment() {
     private fun sendEmailIntent() {
         val emailIntent = Intent(
             Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto", "ficonsupport@gmail.com", null
+                "mailto", "sggbooksofficial@gmail.com", null
             )
         )
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "add my course ")

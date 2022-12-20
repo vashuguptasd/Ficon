@@ -12,7 +12,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView10"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             style="@style/my_clickable_cardview"
             app:cardCornerRadius="0dp">
 
@@ -50,7 +50,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView11"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             style="@style/my_clickable_cardview"
             app:cardCornerRadius="0dp">
 
@@ -87,7 +87,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView12"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="0dp"
             style="@style/my_clickable_cardview" >
@@ -127,7 +127,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView13"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="0dp"
             style="@style/my_clickable_cardview" >

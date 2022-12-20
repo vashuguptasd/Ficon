@@ -21,6 +21,7 @@ class DialogBox : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
+
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
             binding = DialogBoxLayoutBinding.inflate(layoutInflater)
@@ -29,15 +30,11 @@ class DialogBox : DialogFragment() {
             var option3Visibility = false
             var option4Visibility = false
 
-
             viewModel.getSubjectsOptions().let { it ->
                 it?.let {
                     binding.apply {
-
-
                         it.part1Hindi?.let {
                             subjectOption1Hindi.text = it
-
                         }
                         it.part2Hindi?.let {
                             subjectOption2Hindi.text = it
@@ -71,7 +68,6 @@ class DialogBox : DialogFragment() {
                             option4Visibility = true
 
                         }
-
                     }
                 }
             }

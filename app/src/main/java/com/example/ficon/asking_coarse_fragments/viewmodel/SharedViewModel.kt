@@ -39,12 +39,14 @@ class SharedViewModel : ViewModel() {
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
     var listFromServer: LiveData<List<SubjectsDataClass>> = _listFromServer
 
+    //logic for back click and load data again
+    var firstPathString : String? = null
+
     // get fireStore data string
     private fun getFireStorePathString(): String {
         val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
         return regex.replace(pathString, "")
-
     }
 
     fun updateCoarse(coarse: String) {
@@ -116,7 +118,6 @@ class SharedViewModel : ViewModel() {
                 for (document in result) {
                     val myObject = result.toObjects(FireStoreUnitsDataClass::class.java)
                     fireStoreData.value = myObject
-
                 }
             }
             .addOnFailureListener { exception ->
@@ -199,6 +200,9 @@ class SharedViewModel : ViewModel() {
                 }
 
                 override fun onError(error: Error?) {
+                    progressBarVisibility.value = false
+                    // showing error on loading text view
+                    errorDownloadingText.value = true
                     Toast.makeText(
                         context,
                         "Error in downloading file : $error",
@@ -208,6 +212,9 @@ class SharedViewModel : ViewModel() {
                 }
             })
     }
+
+    // showing error on unable to download
+    val errorDownloadingText = MutableLiveData<Boolean>()
 
     fun getRootDirPath(context: Context): String {
         return if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
@@ -229,7 +236,6 @@ class SharedViewModel : ViewModel() {
         val book = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().books
 
 
-
         return when (category){
             "syllabus" -> syllabus.first?.syllabus
             "solved" -> solved.first?.solved
@@ -242,9 +248,9 @@ class SharedViewModel : ViewModel() {
         }
     }
 
-
     // initialising parameters
     init {
+        errorDownloadingText.value = false
         progressBarVisibility.value = true
         syllabusDownloaded.value = false
         solvedDownloaded.value = false
@@ -271,6 +277,7 @@ class SharedViewModel : ViewModel() {
             }
         })
     }
+
     fun showAds(parent: Activity) {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(parent)

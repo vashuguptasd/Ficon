@@ -2,13 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/syllabus"
-        android:id="@+id/askingCoarseFragment"
-        android:icon="@drawable/syllabus" />
-
     <item android:title="@string/solved"
         android:id="@+id/askingYearFragment"
         android:icon="@drawable/solved"/>
+
+    <item android:title="@string/syllabus"
+        android:id="@+id/askingCoarseFragment"
+        android:icon="@drawable/syllabus" />
 
     <item android:title="@string/pyq"
         android:id="@+id/subjectFragment"
