@@ -147,7 +147,11 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadSyllabus(application: Application) {
+        viewModel.errorDownloadingText.value = false
+        viewModel.progressBarVisibility.value = true
+
         if (viewModel.syllabusDownloaded.value == true) {
+            viewModel.progressBarVisibility.value = false
             viewModel.downloadedFilePathSyllabus.value?.let {
                 showPdfFromFile(it)
             }
@@ -164,7 +168,11 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadSolved(application: Application) {
+        viewModel.errorDownloadingText.value = false
+        viewModel.progressBarVisibility.value = true
+
         if (viewModel.solvedDownloaded.value == true) {
+            viewModel.progressBarVisibility.value = false
             viewModel.downloadedFilePathSolved.value?.let { showPdfFromFile(it) }
         } else {
             viewModel.downloadPdfFromInternet(
@@ -180,7 +188,11 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadUnSolved(application: Application) {
+        viewModel.errorDownloadingText.value = false
+        viewModel.progressBarVisibility.value = true
+
         if (viewModel.unSolvedDownloaded.value == true) {
+            viewModel.progressBarVisibility.value = false
             viewModel.downloadedFilePathUnSolved.value?.let { showPdfFromFile(it) }
         } else {
             viewModel.downloadPdfFromInternet(
@@ -195,7 +207,11 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadNotes(application: Application) {
+        viewModel.errorDownloadingText.value = false
+        viewModel.progressBarVisibility.value = true
+
         if (viewModel.notesDownloaded.value == true) {
+            viewModel.progressBarVisibility.value = false
             viewModel.downloadedFilePathNotes.value?.let { showPdfFromFile(it) }
         } else {
             viewModel.downloadPdfFromInternet(
@@ -210,7 +226,11 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadBooks(application: Application) {
+        viewModel.errorDownloadingText.value = false
+        viewModel.progressBarVisibility.value = true
+
         if (viewModel.booksDownloaded.value == true) {
+            viewModel.progressBarVisibility.value = false
             viewModel.downloadedFilePathBooks.value?.let { showPdfFromFile(it) }
         } else {
             viewModel.downloadPdfFromInternet(
@@ -238,6 +258,7 @@ class HolderFragment : Fragment() {
                     Log.e("testApp", "error loading page on${page.toString()} and error ${error.toString()} ")
                 }
                 .load()
+
     }
 
 }
