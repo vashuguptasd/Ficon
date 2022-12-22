@@ -165,8 +165,6 @@ class SharedViewModel : ViewModel() {
     // logic to download pdf only once
     var booksDownloaded = MutableLiveData<Boolean>()
 
-
-
     // download file with PRDownloader
     fun downloadPdfFromInternet(context : Context, category: String, dirPath: String, fileName: String) {
         PRDownloader.download(
@@ -197,11 +195,13 @@ class SharedViewModel : ViewModel() {
                             booksDownloaded.value = true}
 
                     }
+                    errorDownloadingText.value = false
+                    progressBarVisibility.value = false
                 }
 
                 override fun onError(error: Error?) {
+                    // setting up progressbar visibility on startup
                     progressBarVisibility.value = false
-                    // showing error on loading text view
                     errorDownloadingText.value = true
                     Toast.makeText(
                         context,
@@ -235,14 +235,12 @@ class SharedViewModel : ViewModel() {
         val notes = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().notes
         val book = fireStoreData.value?.let { getPreferredUnit(it) } to FireStoreUnitsDataClass().books
 
-
         return when (category){
             "syllabus" -> syllabus.first?.syllabus
             "solved" -> solved.first?.solved
             "unSolved" -> unSolved.first?.unSolved
             "notes" -> notes.first?.notes
             "book" -> book.first?.books
-
 
             else -> {"https://www.orimi.com/pdf-test.pdf"}
         }

@@ -34,6 +34,7 @@ class HolderFragment : Fragment() {
             }
 
             private fun setUpAppPdfDownloadedFalse() {
+                Log.e(LOG,"Back Button Pressed")
                 viewModel.solvedDownloaded.value = false
                 viewModel.unSolvedDownloaded.value = false
                 viewModel.syllabusDownloaded.value = false
@@ -51,8 +52,13 @@ class HolderFragment : Fragment() {
         binding = FragmentHolderBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
+        // setting up progressbar
+        viewModel.progressBarVisibility.value = true
+        viewModel.errorDownloadingText.value = false
+
         // showing error downloading file on download fail
         viewModel.errorDownloadingText.observe(viewLifecycleOwner){
+            Log.e(LOG,"error downloading text value is ${it.toString()}")
             if(it){
                 binding.loadingTextView.visibility = View.VISIBLE
                 binding.loadingTextView.text = getString(R.string.download_fail)
@@ -62,11 +68,10 @@ class HolderFragment : Fragment() {
                 binding.loadingTextView.text = getString(R.string.loading)
             }
         }
-
-
         //show progressbar
         //show loading text view
         viewModel.progressBarVisibility.observe(viewLifecycleOwner){
+            Log.e(LOG,"progressBarVisibility value is ${it.toString()}")
             if (it){
                 binding.loadingTextView.visibility = View.VISIBLE
                 binding.progressBar4.visibility = View.VISIBLE
@@ -133,6 +138,7 @@ class HolderFragment : Fragment() {
                 showPdfFromFile(it)
 
             }
+
             // initialising With solved
             downloadSolved(application)
         }
@@ -141,7 +147,6 @@ class HolderFragment : Fragment() {
     }
 
     private fun downloadSyllabus(application: Application) {
-        viewModel.progressBarVisibility.value = true
         if (viewModel.syllabusDownloaded.value == true) {
             viewModel.downloadedFilePathSyllabus.value?.let {
                 showPdfFromFile(it)
@@ -155,10 +160,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.syllabusDownloaded.value = true
         }
+
     }
 
     private fun downloadSolved(application: Application) {
-        viewModel.progressBarVisibility.value = true
         if (viewModel.solvedDownloaded.value == true) {
             viewModel.downloadedFilePathSolved.value?.let { showPdfFromFile(it) }
         } else {
@@ -170,10 +175,11 @@ class HolderFragment : Fragment() {
             )
             viewModel.solvedDownloaded.value = true
         }
+
+
     }
 
     private fun downloadUnSolved(application: Application) {
-        viewModel.progressBarVisibility.value = true
         if (viewModel.unSolvedDownloaded.value == true) {
             viewModel.downloadedFilePathUnSolved.value?.let { showPdfFromFile(it) }
         } else {
@@ -185,10 +191,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.unSolvedDownloaded.value = true
         }
+
     }
 
     private fun downloadNotes(application: Application) {
-        viewModel.progressBarVisibility.value = true
         if (viewModel.notesDownloaded.value == true) {
             viewModel.downloadedFilePathNotes.value?.let { showPdfFromFile(it) }
         } else {
@@ -200,10 +206,10 @@ class HolderFragment : Fragment() {
             )
             viewModel.notesDownloaded.value = true
         }
+
     }
 
     private fun downloadBooks(application: Application) {
-        viewModel.progressBarVisibility.value = true
         if (viewModel.booksDownloaded.value == true) {
             viewModel.downloadedFilePathBooks.value?.let { showPdfFromFile(it) }
         } else {
@@ -215,6 +221,7 @@ class HolderFragment : Fragment() {
             )
             viewModel.booksDownloaded.value = true
         }
+
     }
 
     private fun showPdfFromFile(file: File) {
@@ -231,7 +238,6 @@ class HolderFragment : Fragment() {
                     Log.e("testApp", "error loading page on${page.toString()} and error ${error.toString()} ")
                 }
                 .load()
-        viewModel.progressBarVisibility.value = false
     }
 
 }

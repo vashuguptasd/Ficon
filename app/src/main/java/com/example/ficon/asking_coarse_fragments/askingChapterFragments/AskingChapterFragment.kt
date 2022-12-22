@@ -62,6 +62,8 @@ class AskingChapterFragment : Fragment() {
                 loadAds()
 
                 findNavController().navigate(R.id.action_askingChapterFragment_to_holderFragment)
+                viewModel.progressBarVisibility.value = true
+                viewModel.errorDownloadingText.value = false
                 viewModel.chapterClickedOn = it
             })
 
