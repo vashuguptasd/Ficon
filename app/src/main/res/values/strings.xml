@@ -26,6 +26,7 @@
     <string name="loading">  Loading...</string>
     <string name="admob_app_id">ca-app-pub-5557597427790866~5173978667</string>
     <string name="admob_banner_id">ca-app-pub-5557597427790866/9139228110</string>
+    <string name="enter_full_screen_mode">enter Full Screen Mode</string>
 
 
 </resources>

@@ -2,12 +2,18 @@ package com.example.ficon.pdfFragments
 
 import android.app.Activity
 import android.app.Application
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.ficon.R
@@ -16,12 +22,14 @@ import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentHolderBinding
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import java.io.File
+import kotlin.properties.Delegates
 
 class HolderFragment : Fragment() {
 
     private lateinit var binding: FragmentHolderBinding
     private val viewModel: SharedViewModel by activityViewModels()
-
+    // Logic to enter Full screen mode
+    private var fullScreenClicked by Delegates.notNull<Boolean>()
     // logic for pdf not changing on changing unit on back click
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,7 @@ class HolderFragment : Fragment() {
                 isEnabled = false
                 activity?.onBackPressed()
             }
+
 
             private fun setUpAppPdfDownloadedFalse() {
                 Log.e(LOG,"Back Button Pressed")
@@ -48,9 +57,13 @@ class HolderFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+
+
         // Inflate the layout for this fragment
         binding = FragmentHolderBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
+
+
 
         // setting up progressbar
         viewModel.progressBarVisibility.value = true
@@ -58,7 +71,6 @@ class HolderFragment : Fragment() {
 
         // showing error downloading file on download fail
         viewModel.errorDownloadingText.observe(viewLifecycleOwner){
-            Log.e(LOG,"error downloading text value is ${it.toString()}")
             if(it){
                 binding.loadingTextView.visibility = View.VISIBLE
                 binding.loadingTextView.text = getString(R.string.download_fail)
@@ -71,7 +83,6 @@ class HolderFragment : Fragment() {
         //show progressbar
         //show loading text view
         viewModel.progressBarVisibility.observe(viewLifecycleOwner){
-            Log.e(LOG,"progressBarVisibility value is ${it.toString()}")
             if (it){
                 binding.loadingTextView.visibility = View.VISIBLE
                 binding.progressBar4.visibility = View.VISIBLE
@@ -143,7 +154,33 @@ class HolderFragment : Fragment() {
             downloadSolved(application)
         }
 
+        // enter full screen mode
+        fullScreenClicked = true
+        binding.fullScreenButton.setOnClickListener {
+            if (fullScreenClicked){
+                enterFullScreen()
+            }else{
+                exitFullScreen()
+            }
+        }
+
         return binding.root
+    }
+
+    private fun exitFullScreen() {
+        binding.fullScreenButton.setImageResource(R.drawable.enter_full_screen)
+        binding.bottomNavigation.visibility = View.VISIBLE
+        fullScreenClicked = true
+        (activity as AppCompatActivity?)?.supportActionBar?.show()
+
+    }
+
+    private fun enterFullScreen() {
+        binding.fullScreenButton.setImageResource(R.drawable.exit_full_screen)
+        binding.bottomNavigation.visibility = View.GONE
+        fullScreenClicked = false
+        (activity as AppCompatActivity?)?.supportActionBar?.hide()
+
     }
 
     private fun downloadSyllabus(application: Application) {
@@ -183,8 +220,6 @@ class HolderFragment : Fragment() {
             )
             viewModel.solvedDownloaded.value = true
         }
-
-
     }
 
     private fun downloadUnSolved(application: Application) {
@@ -260,5 +295,6 @@ class HolderFragment : Fragment() {
                 .load()
 
     }
+
 
 }
