@@ -1,6 +1,5 @@
 package com.example.ficon.asking_coarse_fragments.viewmodel
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Environment
@@ -15,10 +14,6 @@ import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.example.ficon.pdfFragments.firestoreDataClass.FireStoreUnitsDataClass
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
@@ -31,16 +26,13 @@ class SharedViewModel : ViewModel() {
 
     // for calling server specific branch
     var mCoarseSelected = ""
-    var mYearSelected = ""
+    private var mYearSelected = ""
     var mSubjectSelected = ""
     var mPartSelected = ""
 
     private var listRealtimeDatabase: SubjectsDataClass? = null
     private var _listFromServer = MutableLiveData<List<SubjectsDataClass>>()
     var listFromServer: LiveData<List<SubjectsDataClass>> = _listFromServer
-
-    //logic for back click and load data again
-    var firstPathString : String? = null
 
     // get fireStore data string
     private fun getFireStorePathString(): String {
@@ -69,8 +61,12 @@ class SharedViewModel : ViewModel() {
     private fun getRealtimeDatabasePathString(): String {
         val pathString = mCoarseSelected + mYearSelected
         val regex = Regex("[^A-Za-z0-9\t]")
+        Log.e(LOG,regex.replace(pathString, ""))
         return regex.replace(pathString, "")
     }
+
+    // show textview on no data found from realtime database
+    val noDataFoundOnRealtimeDatabase = MutableLiveData<Boolean>()
 
     // get subjects and name of subjects
     fun getListFromRealTimeDatabase(
@@ -88,6 +84,10 @@ class SharedViewModel : ViewModel() {
                         }
                     }
                     _listFromServer.value = subList
+                }
+                else{
+                    noDataFoundOnRealtimeDatabase.value = true
+                    Log.e(LOG,"snapshot not exist")
                 }
             }
 
@@ -248,6 +248,7 @@ class SharedViewModel : ViewModel() {
 
     // initialising parameters
     init {
+        noDataFoundOnRealtimeDatabase.value = false
         errorDownloadingText.value = false
         progressBarVisibility.value = true
         syllabusDownloaded.value = false
@@ -257,30 +258,30 @@ class SharedViewModel : ViewModel() {
         booksDownloaded.value = false
     }
 
-    // making ads available public to show
-    var mInterstitialAd: InterstitialAd? = null
-
-    // initializing ads
-    fun initialiseAds(application: Application) {
-        Log.e(LOG,"calling initialise ads")
-        val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(application,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.e(LOG,"error loading ad")
-                mInterstitialAd = null
-            }
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d(LOG, "Ad loaded")
-                mInterstitialAd = interstitialAd
-            }
-        })
-    }
-
-    fun showAds(parent: Activity) {
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(parent)
-        } else {
-            Log.d("TAG", "The interstitial ad wasn't ready yet.")
-        }
-    }
+//    // making ads available public to show
+//    var mInterstitialAd: InterstitialAd? = null
+//
+//    // initializing ads
+//    fun initialiseAds(application: Application) {
+//        Log.e(LOG,"calling initialise ads")
+//        val adRequest = AdRequest.Builder().build()
+//        InterstitialAd.load(application,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+//            override fun onAdFailedToLoad(adError: LoadAdError) {
+//                Log.e(LOG,"error loading ad")
+//                mInterstitialAd = null
+//            }
+//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+//                Log.d(LOG, "Ad loaded")
+//                mInterstitialAd = interstitialAd
+//            }
+//        })
+//    }
+//
+//    fun showAds(parent: Activity) {
+//        if (mInterstitialAd != null) {
+//            mInterstitialAd?.show(parent)
+//        } else {
+//            Log.d("TAG", "The interstitial ad wasn't ready yet.")
+//        }
+//    }
 }

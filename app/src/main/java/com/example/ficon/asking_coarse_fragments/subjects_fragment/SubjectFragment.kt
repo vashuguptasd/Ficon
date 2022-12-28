@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickListener
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.asCoarseModel
 import com.example.ficon.asking_coarse_fragments.dialog_box.DialogBox
+import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentAskingOptionalBinding
 import com.google.firebase.database.*
@@ -22,10 +25,35 @@ class SubjectFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var adapter: CoarseFragmentRecyclerViewAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // reset error loading text view
+                viewModel.noDataFoundOnRealtimeDatabase.value = false
+                isEnabled = false
+                activity?.onBackPressed()
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+         // reset error loading text view
+        viewModel.noDataFoundOnRealtimeDatabase.observe(viewLifecycleOwner){
+            if (it){
+                binding.errorTextView.visibility = View.VISIBLE
+                binding.selectYourYearRecyclerView.visibility = View.GONE
+            }
+            else{
+                binding.errorTextView.visibility = View.GONE
+                binding.selectYourYearRecyclerView.visibility = View.VISIBLE
+
+            }
+        }
 
         binding = FragmentAskingOptionalBinding.inflate(layoutInflater)
         val activity = requireNotNull(this.activity).application
@@ -34,8 +62,8 @@ class SubjectFragment : Fragment() {
         database.keepSynced(true)
         viewModel.getListFromRealTimeDatabase(activity)
 
+        binding.errorTextView.visibility = View.GONE
         binding.progressBar2.visibility = View.VISIBLE
-
 
         viewModel.listFromServer.observe(viewLifecycleOwner) {
             setUpRecyclerView(it as MutableList<SubjectsDataClass>?)
@@ -54,6 +82,7 @@ class SubjectFragment : Fragment() {
                 if (subList != null) {
                     viewModel.getSubjectFromList(it,subList)?.let { it1 -> viewModel.updateSubjectOptions(it1) }
                 }
+
                 val dialogBox = DialogBox()
                 dialogBox.show(childFragmentManager,"dialog")
 

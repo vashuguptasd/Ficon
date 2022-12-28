@@ -172,7 +172,6 @@ class HolderFragment : Fragment() {
         binding.bottomNavigation.visibility = View.VISIBLE
         fullScreenClicked = true
         (activity as AppCompatActivity?)?.supportActionBar?.show()
-
     }
 
     private fun enterFullScreen() {
