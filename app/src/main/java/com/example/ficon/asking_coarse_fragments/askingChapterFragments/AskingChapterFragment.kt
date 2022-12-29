@@ -46,7 +46,7 @@ class AskingChapterFragment : Fragment() {
 
             // initializing ads
             val adRequest = AdRequest.Builder().build()
-            InterstitialAd.load(application,"ca-app-pub-5557597427790866/9139228110", adRequest, object : InterstitialAdLoadCallback() {
+            InterstitialAd.load(application,"ca-app-pub-2008088454941941/6299545425", adRequest, object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.e(LOG,"error loading ad ${adError.toString()}")
                     mInterstitialAd = null
