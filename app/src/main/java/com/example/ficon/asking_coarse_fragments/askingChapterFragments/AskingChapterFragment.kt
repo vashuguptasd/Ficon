@@ -85,7 +85,5 @@ class AskingChapterFragment : Fragment() {
             Log.d("TAG", "The interstitial ad wasn't ready yet.")
         }
     }
-
-
 }
 

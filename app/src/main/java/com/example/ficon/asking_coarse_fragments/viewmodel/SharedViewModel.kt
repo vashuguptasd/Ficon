@@ -38,7 +38,8 @@ class SharedViewModel : ViewModel() {
     private fun getFireStorePathString(): String {
         val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
-        return regex.replace(pathString, "")
+        val path = regex.replace(pathString, "")
+        return path
     }
 
     fun updateCoarse(coarse: String) {
@@ -174,7 +175,7 @@ class SharedViewModel : ViewModel() {
         ).build()
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
-                    Toast.makeText(context, "downloadComplete", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "pdf Downloaded", Toast.LENGTH_LONG)
                         .show()
                     val downloadedFile = File(dirPath, fileName)
 
@@ -246,6 +247,39 @@ class SharedViewModel : ViewModel() {
         }
     }
 
+    //sharing link liveData Variable
+    val sharingAppLink = MutableLiveData<String>()
+
+    // get app sharing link from database
+    fun getSharingLinkFromRealtimeDataBase(
+        activity: Application?
+    ) {
+        val dbRef = database.child("appLink").child("ficon")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val link = snapshot.value.toString()
+                    Log.d(LOG,link)
+                    sharingAppLink.value = link
+
+                }
+                else{
+                    Log.e(LOG,"Link Not Found")
+                    Toast.makeText(activity, " Error Getting Link", Toast.LENGTH_SHORT).show()
+                    sharingAppLink.value = "Try Again"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(activity, "Sharing Fail", Toast.LENGTH_SHORT).show()
+                Log.e(LOG,"sharing fail $error")
+                sharingAppLink.value = "Connection Error"
+            }
+
+        })
+
+    }
+
     // initialising parameters
     init {
         noDataFoundOnRealtimeDatabase.value = false
@@ -256,32 +290,7 @@ class SharedViewModel : ViewModel() {
         unSolvedDownloaded.value = false
         notesDownloaded.value = false
         booksDownloaded.value = false
+
     }
 
-//    // making ads available public to show
-//    var mInterstitialAd: InterstitialAd? = null
-//
-//    // initializing ads
-//    fun initialiseAds(application: Application) {
-//        Log.e(LOG,"calling initialise ads")
-//        val adRequest = AdRequest.Builder().build()
-//        InterstitialAd.load(application,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
-//            override fun onAdFailedToLoad(adError: LoadAdError) {
-//                Log.e(LOG,"error loading ad")
-//                mInterstitialAd = null
-//            }
-//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-//                Log.d(LOG, "Ad loaded")
-//                mInterstitialAd = interstitialAd
-//            }
-//        })
-//    }
-//
-//    fun showAds(parent: Activity) {
-//        if (mInterstitialAd != null) {
-//            mInterstitialAd?.show(parent)
-//        } else {
-//            Log.d("TAG", "The interstitial ad wasn't ready yet.")
-//        }
-//    }
 }
