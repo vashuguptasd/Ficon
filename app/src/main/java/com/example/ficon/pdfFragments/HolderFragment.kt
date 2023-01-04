@@ -35,12 +35,13 @@ class HolderFragment : Fragment() {
         super.onCreate(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                // resetting full screen on back press
+                exitFullScreen()
                 // setting all pdf as not downloaded
                 setUpAppPdfDownloadedFalse()
                 isEnabled = false
                 activity?.onBackPressed()
             }
-
 
             private fun setUpAppPdfDownloadedFalse() {
                 Log.e(LOG,"Back Button Pressed")
