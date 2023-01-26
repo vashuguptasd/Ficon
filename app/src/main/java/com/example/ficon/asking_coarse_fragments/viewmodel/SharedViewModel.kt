@@ -38,8 +38,7 @@ class SharedViewModel : ViewModel() {
     private fun getFireStorePathString(): String {
         val pathString = mCoarseSelected + mYearSelected + mSubjectSelected + mPartSelected
         val regex = Regex("[^A-Za-z0-9\t]")
-        val path = regex.replace(pathString, "")
-        return path
+        return regex.replace(pathString, "")
     }
 
     fun updateCoarse(coarse: String) {

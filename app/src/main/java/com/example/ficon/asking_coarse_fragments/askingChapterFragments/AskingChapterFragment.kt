@@ -3,13 +3,11 @@ package com.example.ficon.asking_coarse_fragments.askingChapterFragments
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ficon.R
@@ -25,8 +23,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 class AskingChapterFragment : Fragment() {
-    private val viewModel : SharedViewModel by activityViewModels()
-    private lateinit var binding : FragmentAskingChapterBinding
+    private val viewModel: SharedViewModel by activityViewModels()
+    private lateinit var binding: FragmentAskingChapterBinding
+
     // ads holder
     private var mInterstitialAd: InterstitialAd? = null
 
@@ -42,22 +41,27 @@ class AskingChapterFragment : Fragment() {
             // showing progressbar at start
             progressBar3.visibility = View.VISIBLE
 
-            recyclerView.layoutManager = GridLayoutManager(application,1)
+            recyclerView.layoutManager = GridLayoutManager(application, 1)
 
             // initializing ads
             val adRequest = AdRequest.Builder().build()
-            InterstitialAd.load(application,"ca-app-pub-2008088454941941/6299545425", adRequest, object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e(LOG,"error loading ad ${adError.toString()}")
-                    mInterstitialAd = null
-                }
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.d(LOG, "Ad loaded")
-                    mInterstitialAd = interstitialAd
-                }
-            })
+            InterstitialAd.load(
+                application,
+                "ca-app-pub-2008088454941941/6299545425",
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        Log.e(LOG, "error loading ad $adError")
+                        mInterstitialAd = null
+                    }
 
-            val adapter =  CoarseFragmentRecyclerViewAdapter(33,22, ClickListener {
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d(LOG, "Ad loaded")
+                        mInterstitialAd = interstitialAd
+                    }
+                })
+
+            val adapter = CoarseFragmentRecyclerViewAdapter(33, 22, ClickListener {
 
                 loadAds()
 
@@ -68,12 +72,12 @@ class AskingChapterFragment : Fragment() {
             })
 
             recyclerView.adapter = adapter
-            viewModel.mFireStoreData.observe(viewLifecycleOwner, Observer {
-                       adapter.submitList(it.asCoarseModel())
+            viewModel.mFireStoreData.observe(viewLifecycleOwner) {
+                adapter.submitList(it.asCoarseModel())
 
                 // removing progressBar on list loaded
                 progressBar3.visibility = View.GONE
-            })
+            }
         }
         return binding.root
     }

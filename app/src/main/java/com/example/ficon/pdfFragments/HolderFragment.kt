@@ -94,7 +94,6 @@ class HolderFragment : Fragment() {
         }
 
         binding.apply {
-
             // setting up bottom navigation bar
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {

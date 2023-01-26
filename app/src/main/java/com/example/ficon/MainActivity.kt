@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.ActivityMainBinding
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"SGG Books Download Kare is Link Se ✌\n$link")
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"SGG Books & PYQ Download Kare is Link Se ✌\n$link")
         startActivity(Intent.createChooser(shareIntent,"Share App"))
     }
 

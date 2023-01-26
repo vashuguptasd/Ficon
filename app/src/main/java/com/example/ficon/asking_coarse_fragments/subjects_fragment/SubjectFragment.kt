@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.ClickListener
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.CoarseFragmentRecyclerViewAdapter
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.SubjectsDataClass
 import com.example.ficon.asking_coarse_fragments.adapter_and_dataClass.asCoarseModel
 import com.example.ficon.asking_coarse_fragments.dialog_box.DialogBox
-import com.example.ficon.asking_coarse_fragments.viewmodel.LOG
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
 import com.example.ficon.databinding.FragmentAskingOptionalBinding
 import com.google.firebase.database.*

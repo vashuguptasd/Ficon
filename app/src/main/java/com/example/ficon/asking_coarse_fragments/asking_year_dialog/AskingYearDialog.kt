@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
-import com.example.ficon.databinding.DialogBoxLayoutBinding
 import com.example.ficon.databinding.FragmentAskingYearBinding
 
 class AskingYearDialog : DialogFragment() {
@@ -20,8 +19,7 @@ class AskingYearDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater;
+
             binding = FragmentAskingYearBinding.inflate(layoutInflater)
 
             val views = listOf(

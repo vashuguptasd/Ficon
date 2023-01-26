@@ -3,11 +3,9 @@ package com.example.ficon.asking_coarse_fragments.dialog_box
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ficon.R
 import com.example.ficon.asking_coarse_fragments.viewmodel.SharedViewModel
@@ -22,8 +20,6 @@ class DialogBox : DialogFragment() {
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
 
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater;
             binding = DialogBoxLayoutBinding.inflate(layoutInflater)
             var option1Visibility = false
             var option2Visibility = false
