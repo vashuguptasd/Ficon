@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/askingCoarseFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.coarse_fragment.AskingCoarseFragment"
+        android:name="com.sgg.ficon.asking_coarse_fragments.coarse_fragment.AskingCoarseFragment"
         android:label="fragment_asking_coarse"
         tools:layout="@layout/fragment_asking_coarse" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/subjectFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.subjects_fragment.SubjectFragment"
+        android:name="com.sgg.ficon.asking_coarse_fragments.subjects_fragment.SubjectFragment"
         android:label="SubjectFragment" >
         <action
             android:id="@+id/action_subjectFragment_to_askingChapterFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/askingChapterFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.askingChapterFragments.AskingChapterFragment"
+        android:name="com.sgg.ficon.asking_coarse_fragments.askingChapterFragments.AskingChapterFragment"
         android:label="AskingChapterFragment" >
         <action
             android:id="@+id/action_askingChapterFragment_to_holderFragment"
@@ -61,10 +61,10 @@
     </fragment>
     <fragment
         android:id="@+id/holderFragment"
-        android:name="com.example.ficon.pdfFragments.HolderFragment"
+        android:name="com.sgg.ficon.pdfFragments.HolderFragment"
         android:label="HolderFragment" />
     <fragment
         android:id="@+id/copyRightFragment"
-        android:name="com.example.ficon.asking_coarse_fragments.copyrightFragment.CopyRightFragment"
+        android:name="com.sgg.ficon.asking_coarse_fragments.copyrightFragment.CopyRightFragment"
         android:label="CopyRightFragment" />
 </navigation>

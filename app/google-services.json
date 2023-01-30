@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1017371676403",
+    "firebase_url": "https://ficon-8b528-default-rtdb.firebaseio.com",
+    "project_id": "ficon-8b528",
+    "storage_bucket": "ficon-8b528.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017371676403:android:baebdddd1f3c48790eb186",
+        "android_client_info": {
+          "package_name": "com.example.ficon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017371676403-bsad5qjde295515f2hl51qoi0831qtbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABdxZ4lxV9bssLcgxEKZiAr0f23qOxMFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017371676403-bsad5qjde295515f2hl51qoi0831qtbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017371676403:android:60e782d8994fa93e0eb186",
+        "android_client_info": {
+          "package_name": "com.sgg.ficon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017371676403-bsad5qjde295515f2hl51qoi0831qtbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABdxZ4lxV9bssLcgxEKZiAr0f23qOxMFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017371676403-bsad5qjde295515f2hl51qoi0831qtbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
